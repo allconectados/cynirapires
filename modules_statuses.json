@@ -1,0 +1,9 @@
+{
+    "Administration": true,
+    "Coordination": true,
+    "Secretary": true,
+    "Proatec": true,
+    "Teacher": true,
+    "Student": true,
+    "Visitant": true
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Coordination",
+    "alias": "coordination",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Coordination\\Providers\\CoordinationServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

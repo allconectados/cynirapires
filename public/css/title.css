@@ -1,0 +1,31 @@
+
+
+/*TITLE PAGES*/
+.with-line {
+    overflow: hidden;
+    text-align: center;
+    text-transform: uppercase;
+}
+.with-line::after, .with-line::before {
+    background-color: #333;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+}
+.with-line::before {
+    right: 2rem;
+    margin-left: -100%;
+}
+.with-line::after {
+    left: 2rem;
+    margin-right: -100%;
+}
+.with-line.left {
+    text-align: left;
+}
+.with-line.right {
+    text-align: right;
+}

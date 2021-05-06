@@ -1,0 +1,13 @@
+{
+    "name": "Proatec",
+    "alias": "proatec",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Proatec\\Providers\\ProatecServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
