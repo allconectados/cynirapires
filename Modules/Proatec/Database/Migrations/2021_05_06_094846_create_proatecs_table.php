@@ -18,6 +18,7 @@ class CreateProatecsTable extends Migration
             $table->boolean('is_super_admin')->default(0);
             $table->string('code')->unique();
             $table->string('name');
+            $table->string('cargo');
             $table->string('email')->unique();
             $table->timestamps();
         });

@@ -16,19 +16,21 @@ class SecretaryImport implements ToModel
     */
     public function model(array $item)
     {
-        if (Secretary::where('email', '=', $item[1])->count() > 0) {
+        if (Secretary::where('email', '=', $item[2])->count() > 0) {
             // Se existir será atualizado na tabela secretaries
-            DB::table('secretaries')->where('email', '=', $item[1])->update(
+            DB::table('secretaries')->where('email', '=', $item[2])->update(
                 [
                     'name' => nameCase($item[0]),
-                    'email' => $item[1],
+                    'cargo' => nameCase($item[1]),
+                    'email' => $item[2],
                 ]
             );
         }else{
             Secretary::create([
                 'code' => uniqid(),
                 'name' => nameCase($item[0]),
-                'email' => $item[1],
+                'cargo' => nameCase($item[1]),
+                'email' => $item[2],
 
             ]);
         }

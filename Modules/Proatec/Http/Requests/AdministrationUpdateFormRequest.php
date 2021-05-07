@@ -41,6 +41,10 @@ class AdministrationUpdateFormRequest extends FormRequest
                 Rule::unique('administrations', 'name')
                     ->ignore($this->id)
             ],
+            'cargo' => [
+                'required',
+                'string',
+            ],
             'email' => [
                 'required',
                 'string',

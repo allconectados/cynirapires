@@ -5,6 +5,8 @@ namespace Modules\Proatec\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Proatec\Entities\Teacher;
 
 class TeacherController extends Controller
 {
@@ -14,6 +16,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
+
         return view('proatec::index');
     }
 

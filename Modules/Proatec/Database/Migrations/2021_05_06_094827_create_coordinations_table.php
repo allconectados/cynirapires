@@ -17,6 +17,7 @@ class CreateCoordinationsTable extends Migration
             $table->id('id');
             $table->string('code')->unique();
             $table->string('name');
+            $table->string('cargo');
             $table->string('email')->unique();
             $table->timestamps();
         });

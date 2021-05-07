@@ -57,7 +57,7 @@
     </div>
     <hr>
 </div>
-<div class="container">
+<div class="container-fluid">
     {{--EXIBE MENSAGENS DE ERRO--}}
     @if(isset($errors) && count($errors) > 0)
         <div class="alert alert-warning">

@@ -2,10 +2,8 @@
 
 namespace Modules\Proatec\Imports;
 
-use App\Models\Administration;
+
 use Modules\Proatec\Entities\Discipline;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 

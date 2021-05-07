@@ -1,4 +1,4 @@
-<form action="{{route('disciplines.update', $item->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('modules.disciplines.update', $item->id)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="row">
@@ -8,7 +8,6 @@
                 <input type="text" name="code" class="form-control form-control-sm"
                        value="{{$item->code}}" readonly>
                 <small id="emailHelp" class="form-text text-muted">Não alterar!</small>
-                {{--                {!! $errors->first('code', '<p class="alert alert-warning">:message</p>') !!}--}}
             </div>
 
         </div>
@@ -17,7 +16,6 @@
             <div class="form-group">
                 <input name="title" class="form-control form-control-sm" value="{{$item->title, old('title')}}">
                 <small id="emailHelp" class="form-text text-muted">Digite o título da disciplina!</small>
-                {{--                {!! $errors->first('title', '<p class="alert alert-warning">:message</p>') !!}--}}
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">

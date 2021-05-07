@@ -29,6 +29,7 @@ class SecretaryStoreFormRequest extends FormRequest
         return [
             'code'      => 'required|string|unique:secretaries',
             'name'      => 'required|string|min:3|max:100|unique:secretaries',
+            'cargo'      => 'required|string',
             'email'      => 'required|email|min:3|max:100|unique:secretaries',
         ];
     }

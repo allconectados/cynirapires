@@ -47,6 +47,10 @@ class ProatecUpdateFormRequest extends FormRequest
                 Rule::unique('proatecs', 'name')
                     ->ignore($this->id)
             ],
+            'cargo' => [
+                'required',
+                'string',
+            ],
             'email' => [
                 'required',
                 'string',

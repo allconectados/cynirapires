@@ -14,6 +14,7 @@ class Coordination extends Model
     protected $fillable = [
         'code',
         'name',
+        'cargo',
         'email',
     ];
 }

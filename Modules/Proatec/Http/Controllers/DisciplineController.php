@@ -5,6 +5,10 @@ namespace Modules\Proatec\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Proatec\Entities\Discipline;
+use Modules\Proatec\Imports\DisciplineImport;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DisciplineController extends Controller
 {
@@ -14,7 +18,24 @@ class DisciplineController extends Controller
      */
     public function index()
     {
-        return view('proatec::index');
+        $titlePage = 'Administrar Turma';
+
+        $data = Discipline::orderBy('title', 'asc')->paginate(30);
+
+        return view('proatec::disciplines.index', compact('titlePage', 'data'));
+    }
+
+    public function importDiscipline()
+    {
+        $import = Excel::import(new DisciplineImport(), request()->file('select_file'));
+
+        if ($import) {
+            Alert::success('Sucesso!', 'Registros importados com sucesso!');
+            return redirect()->back();
+        } else {
+            Alert::error('Error!', 'Não foi possível importar os registros!');
+            return redirect()->back();
+        }
     }
 
     /**

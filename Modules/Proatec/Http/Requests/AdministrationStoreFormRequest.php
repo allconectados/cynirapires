@@ -29,6 +29,7 @@ class AdministrationStoreFormRequest extends FormRequest
         return [
             'code'      => 'required|string|unique:administrations',
             'name'      => 'required|string|min:3|max:100|unique:administrations',
+            'cargo'      => 'required|string',
             'email'      => 'required|email|min:3|max:100|unique:administrations',
         ];
     }

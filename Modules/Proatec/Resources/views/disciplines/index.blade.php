@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <a class="btn btn-primary btn-sm btn-block" href="{{route('dashboard.proatecs')}}">
+                    <a class="btn btn-primary btn-sm btn-block" href="{{route('modules.proatecs.dashboard')}}">
                         Painel
                     </a>
                 </div>
@@ -22,18 +22,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                @include('backend.proatecs.disciplines._forms.import')
+                @include('proatec::disciplines._forms.import')
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                @if($years->count() > 0)
-                    @include('backend.proatecs.disciplines._forms.create')
-                @else
-                    <span class="alert alert-warning">Não existe nenhum ano relacionado!</span>
-                @endif
+                @include('proatec::disciplines._forms.create')
             </div>
         </div>
     </div>
@@ -57,12 +53,12 @@
                                     <td class="text-truncate text-center">{{$item->code}}</td>
                                     <td class="text-truncate">{{$item->title}}</td>
                                     <td class="text-center" style="width: 1.0rem">
-                                        <a href="{{route('disciplines.edit', $item->id)}}"
+                                        <a href="{{route('modules.disciplines.edit', $item->id)}}"
                                            class="btn btn-warning btn-sm">
                                             <i class="fas fa-pen-square"></i>
                                         </a>
                                     </td>
-                                    <form action="{{route('disciplines.destroy', $item->id) }}" method="POST">
+                                    <form action="{{route('modules.disciplines.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <td class="text-center" style="width: 1.0rem">
@@ -79,7 +75,7 @@
                         <div class="container-fluid">
                             <div class="d-flex">
                                 <div class="mx-auto">
-                                    @include('backend.partials._index_paginate')
+                                    @include('proatec::partials._index_paginate')
                                 </div>
                             </div>
                         </div>

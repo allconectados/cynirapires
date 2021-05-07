@@ -15,6 +15,7 @@ class Proatec extends Model
         'is_super_admin',
         'code',
         'name',
+        'cargo',
         'email',
     ];
 }

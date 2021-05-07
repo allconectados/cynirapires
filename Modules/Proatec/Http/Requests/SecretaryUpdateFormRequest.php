@@ -41,6 +41,10 @@ class SecretaryUpdateFormRequest extends FormRequest
                 Rule::unique('secretaries', 'name')
                     ->ignore($this->id)
             ],
+            'cargo' => [
+                'required',
+                'string',
+            ],
             'email' => [
                 'required',
                 'string',

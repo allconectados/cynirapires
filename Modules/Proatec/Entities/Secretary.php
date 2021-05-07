@@ -14,6 +14,7 @@ class Secretary extends Model
     protected $fillable = [
         'code',
         'name',
+        'cargo',
         'email',
     ];
 }

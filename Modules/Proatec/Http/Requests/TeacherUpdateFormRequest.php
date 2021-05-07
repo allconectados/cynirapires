@@ -41,6 +41,10 @@ class TeacherUpdateFormRequest extends FormRequest
                 Rule::unique('teachers', 'name')
                     ->ignore($this->id)
             ],
+            'cargo' => [
+                'required',
+                'string',
+            ],
             'email' => [
                 'required',
                 'string',

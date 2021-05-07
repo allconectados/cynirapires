@@ -14,6 +14,7 @@ class Administration extends Model
     protected $fillable = [
         'code',
         'name',
+        'cargo',
         'email',
     ];
 }

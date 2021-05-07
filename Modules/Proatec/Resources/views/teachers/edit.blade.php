@@ -20,16 +20,10 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg col-xl">
-                <h5 class="with-line left">{{$titlePage}}</h5>
-            </div>
-        </div>
-        <hr>
-    </div>
-    <div class="container">
         @include('proatec::teachers._forms.edit')
     </div>
+    <hr>
+
 @endsection
 
 

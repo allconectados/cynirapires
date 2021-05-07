@@ -29,6 +29,7 @@ class TeacherStoreFormRequest extends FormRequest
         return [
             'code'      => 'required|string|unique:teachers',
             'name'      => 'required|string|min:3|max:100|unique:teachers',
+            'cargo'      => 'required|string',
             'email'      => 'required|email|min:3|max:100|unique:teachers',
         ];
     }

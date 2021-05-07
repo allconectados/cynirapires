@@ -29,6 +29,7 @@ class CoordinationStoreFormRequest extends FormRequest
         return [
             'code'      => 'required|string|unique:coordinations',
             'name'      => 'required|string|min:3|max:100|unique:coordinations',
+            'cargo'      => 'required|string',
             'email'      => 'required|email|min:3|max:100|unique:coordinations',
         ];
     }

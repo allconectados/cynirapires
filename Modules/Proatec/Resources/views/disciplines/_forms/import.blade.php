@@ -1,4 +1,4 @@
-<form action="{{route('disciplines.import')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('modules.disciplines.import')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11">

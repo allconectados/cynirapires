@@ -29,6 +29,7 @@ class ProatecStoreFormRequest extends FormRequest
         return [
             'code'      => 'required|string|unique:proatecs',
             'name'      => 'required|string|min:3|max:100|unique:proatecs',
+            'cargo'      => 'required|string',
             'email'      => 'required|email|min:3|max:100|unique:proatecs',
         ];
     }

@@ -14,9 +14,7 @@ use Modules\Proatec\Entities\Proatec;
 use Modules\Proatec\Entities\Secretary;
 use Modules\Proatec\Entities\Teacher;
 use Modules\Proatec\Http\Requests\AdministrationStoreFormRequest;
-use Modules\Proatec\Http\Requests\AdministrationUpdateFormRequest;
 use Modules\Proatec\Http\Requests\CoordinationStoreFormRequest;
-use Modules\Proatec\Http\Requests\CoordinationUpdateFormRequest;
 use Modules\Proatec\Http\Requests\ProatecStoreFormRequest;
 use Modules\Proatec\Http\Requests\SecretaryStoreFormRequest;
 use Modules\Proatec\Http\Requests\TeacherStoreFormRequest;
@@ -196,7 +194,11 @@ class ProatecController extends Controller
 
         $data = Teacher::orderBy('name', 'asc')->paginate(10);
 
-        return view('proatec::teachers.index', compact('data', 'titlePage'));
+        $disciplines = DB::table('disciplines')->select('id', 'title')->get();
+
+        $rooms = DB::table('rooms')->select('id', 'title')->get();
+
+        return view('proatec::teachers.index', compact('data', 'titlePage', 'disciplines', 'rooms'));
     }
 
     public function importTeacher()
@@ -223,7 +225,11 @@ class ProatecController extends Controller
 
         $titlePage = 'Editar: '.$item->name;
 
-        return view('proatec::teachers.edit', compact('item', 'titlePage'));
+        $disciplines = DB::table('disciplines')->select('id', 'title')->get();
+
+        $rooms = DB::table('rooms')->select('id', 'title')->get();
+
+        return view('proatec::teachers.edit', compact('item', 'titlePage', 'disciplines', 'rooms'));
     }
 
     public function updateTeacher(TeacherUpdateFormRequest $classFormRequest, $id)

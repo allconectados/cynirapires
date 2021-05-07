@@ -41,6 +41,10 @@ class CoordinationUpdateFormRequest extends FormRequest
                 Rule::unique('coordinations', 'name')
                     ->ignore($this->id)
             ],
+            'cargo' => [
+                'required',
+                'string',
+            ],
             'email' => [
                 'required',
                 'string',

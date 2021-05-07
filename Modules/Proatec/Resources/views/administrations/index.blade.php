@@ -36,6 +36,7 @@
                             <tr>
                                 <th scope="col" style="width: 7.0rem">Código</th>
                                 <th scope="col">Nome</th>
+                                <th scope="col">Cargo</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col" style="width: 1.0rem">Excluír</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <tr>
                                     <td class="text-truncate">{{$item->code}}</td>
                                     <td class="text-truncate">{{$item->name}}</td>
+                                    <td class="text-truncate">{{$item->cargo}}</td>
                                     <td class="text-truncate">{{$item->email}}</td>
                                     <td>
                                         <a class="btn btn-danger btn-sm" data-toggle="modal"

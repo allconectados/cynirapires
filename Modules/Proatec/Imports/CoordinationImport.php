@@ -16,19 +16,21 @@ class CoordinationImport implements ToModel
     */
     public function model(array $item)
     {
-        if (Coordination::where('email', '=', $item[1])->count() > 0) {
+        if (Coordination::where('email', '=', $item[2])->count() > 0) {
             // Se existir será atualizado na tabela coordinations
-            DB::table('coordinations')->where('email', '=', $item[1])->update(
+            DB::table('coordinations')->where('email', '=', $item[2])->update(
                 [
                     'name' => nameCase($item[0]),
-                    'email' => $item[1],
+                    'cargo' => nameCase($item[1]),
+                    'email' => $item[2],
                 ]
             );
         }else{
             Coordination::create([
                 'code' => uniqid(),
                 'name' => nameCase($item[0]),
-                'email' => $item[1],
+                'cargo' => nameCase($item[1]),
+                'email' => $item[2],
 
             ]);
         }

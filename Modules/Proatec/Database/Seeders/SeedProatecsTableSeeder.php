@@ -22,6 +22,7 @@ class SeedProatecsTableSeeder extends Seeder
                 'is_super_admin' => 1,
                 'code' => uniqid(),
                 'name' => 'José Carlos',
+                'cargo' => 'Proatec',
                 'email' => 'jcarneiro@prof.educacao.sp.gov.br',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
@@ -30,6 +31,7 @@ class SeedProatecsTableSeeder extends Seeder
                 'is_super_admin' => 0,
                 'code' => uniqid(),
                 'name' => 'William Lemos',
+                'cargo' => 'Proatec',
                 'email' => 'wlemos@prof.educacao.sp.gov.br',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')

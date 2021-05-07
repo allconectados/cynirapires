@@ -1,4 +1,4 @@
-<form action="{{route('disciplines.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('modules.disciplines.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
@@ -7,7 +7,6 @@
                 <input type="text" name="code" class="form-control form-control-sm"
                        value="{{uniqid()}}" readonly>
                 <small id="emailHelp" class="form-text text-muted">Não alterar!</small>
-{{--                {!! $errors->first('code', '<p class="alert alert-warning">:message</p>') !!}--}}
             </div>
 
         </div>
@@ -16,7 +15,6 @@
             <div class="form-group">
                 <input name="title" class="form-control form-control-sm" value="{{old('title')}}">
                 <small id="emailHelp" class="form-text text-muted">Digite o título da disciplina!</small>
-{{--                {!! $errors->first('title', '<p class="alert alert-warning">:message</p>') !!}--}}
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
