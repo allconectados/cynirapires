@@ -53,6 +53,7 @@ class LoginController extends Controller
     {
         $providerUser = Socialite::driver($provider)->user();
 
+        $emailAdmin = DB::table('admins')->where('email', '=', $providerUser->getEmail())->first();
         $emailAdministration = DB::table('administrations')->where('email', '=', $providerUser->getEmail())->first();
         $emailProatec = DB::table('proatecs')->where('email', '=', $providerUser->getEmail())->first();
         $emailCoordination = DB::table('coordinations')->where('email', '=', $providerUser->getEmail())->first();
@@ -60,7 +61,7 @@ class LoginController extends Controller
         $emailTeacher = DB::table('teachers')->where('email', '=', $providerUser->getEmail())->first();
         $emailStudent = DB::table('students')->where('email', '=', $providerUser->getEmail())->first();
 
-        if ($emailProatec) {
+        if ($emailAdmin) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
                 'name' => $providerUser->getName() ?? $providerUser->getNickname(),
@@ -70,7 +71,18 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.proatecs.dashboard');
+            return redirect()->route('modules.admins.index');
+        } elseif ($emailProatec) {
+            $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
+                'code' => uniqid(),
+                'name' => $providerUser->getName() ?? $providerUser->getNickname(),
+                'provider_id' => $providerUser->getId(),
+                'provider' => $provider,
+                'avatar' => $providerUser->getAvatar(),
+            ]);
+
+            Auth::login($user);
+            return redirect()->route('modules.proatecs.index');
         } elseif ($emailAdministration) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -81,7 +93,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.administrations.dashboard');
+            return redirect()->route('modules.administrations.index');
         } elseif ($emailCoordination) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -92,7 +104,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.coordinations.dashboard');
+            return redirect()->route('modules.coordinations.index');
         } elseif ($emailSecretary) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -103,7 +115,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.secretaries.dashboard');
+            return redirect()->route('modules.secretaries.index');
         } elseif ($emailTeacher) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -114,7 +126,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.teachers.dashboard');
+            return redirect()->route('modules.teachers.index');
         } elseif ($emailStudent) {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -125,7 +137,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.students.dashboard');
+            return redirect()->route('modules.students.index');
         } else {
             $user = User::firstOrCreate(['email' => $providerUser->getEmail()], [
                 'code' => uniqid(),
@@ -136,32 +148,7 @@ class LoginController extends Controller
             ]);
 
             Auth::login($user);
-            return redirect()->route('modules.visitants.dashboard');
+            return redirect()->route('modules.visitants.index');
         }
-
-
-//        if ($providerUser->getEmail() === 'jccarneiros@gmail.com') {
-//            return redirect()->route('dashboard.admins');
-//        } else {
-//            if ($providerUser->getEmail() == $emailUser){
-//                $emailDomain = explode('@', $providerUser->getEmail());
-//                switch ($emailDomain[1]) {
-//                    case "servidor.educacao.sp.gov.br":
-//                        return redirect()->route('dashboard.administrations');
-//                        break;
-//                    case "prof.educacao.sp.gov.br":
-//                        return redirect()->route('dashboard.teachers');
-//                        break;
-//                    case "al.educacao.sp.gov.br":
-//                        return redirect()->route('dashboard.students');
-//                        break;
-//                    case "gmail.com":
-//                        return redirect()->route('dashboard.visitants');
-//                        break;
-//                }
-//            }else{
-//                return redirect()->back();
-//            }
-//        }
     }
 }

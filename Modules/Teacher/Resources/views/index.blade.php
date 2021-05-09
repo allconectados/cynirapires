@@ -3,13 +3,6 @@
 @section('content')
     <h1>Hello World</h1>
 
-    @forelse($teacher as $item)
-        @forelse($item->rooms as $room)
-            <span class="btn btn-primary">{{$room->title}}</span>
-        @empty
+            <a href="{{route('modules.teachers.disciplines.index', $teacher->email)}}" class="btn btn-primary btn-sm">Disciplinas</a>
 
-        @endforelse
-    @empty
-
-    @endforelse
 @endsection

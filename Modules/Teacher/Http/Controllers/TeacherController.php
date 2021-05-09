@@ -5,6 +5,8 @@ namespace Modules\Teacher\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\Proatec\Entities\Discipline;
 use Modules\Proatec\Entities\Room;
 use Modules\Proatec\Entities\Teacher;
 
@@ -18,9 +20,7 @@ class TeacherController extends Controller
     {
         $titlePage = 'Olá, '.auth()->user()->name.'!';
 
-        $teacher = Room::with('teachers')->get();
-
-        dd($teacher);
+        $teacher = Teacher::where('email', '=',  auth()->user()->email)->first();
 
         return view('teacher::index', compact('titlePage', 'teacher'));
     }

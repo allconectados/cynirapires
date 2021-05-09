@@ -16,6 +16,5 @@ class ProatecDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-         $this->call(SeedProatecsTableSeeder::class);
     }
 }
