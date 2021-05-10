@@ -46,6 +46,13 @@
                     </a>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12 col-lg col-xl">
+                <div class="form-group">
+                    <a class="btn btn-primary btn-sm btn-block" href="{{route('admins.students.index')}}">
+                        Estudantes
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container">

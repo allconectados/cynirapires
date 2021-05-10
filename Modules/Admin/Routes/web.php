@@ -64,3 +64,18 @@ Route::prefix('painel/admin')->middleware('auth')->group(function () {
     Route::put('/disciplines/update/{id}','DisciplineController@update')->name('admins.disciplines.update');
     Route::delete('/disciplines/destroy/{id}', 'DisciplineController@destroy')->name('admins.disciplines.destroy');
 });
+
+
+//ROTAS DE STUDENTS /////////////////////////////////////////////////////////////////////////////////////////////////
+Route::prefix('painel/admin')->middleware(['auth'])->group(function () {
+    Route::get('/students', 'StudentController@index')->name('admins.students.index');
+    Route::get('/students/{id}/edit', 'StudentController@edit')->name('admins.students.edit');
+    Route::post('/students/import', 'StudentController@import')->name('admins.students.import');
+    Route::post('/students/store', 'StudentController@store')->name('admins.students.store');
+    Route::put('/students/update/{id}', 'StudentController@update')->name('admins.students.update');
+    Route::delete('/students/destroy/{id}', 'StudentController@destroy')->name('admins.students.destroy');
+    Route::post('/destroy-students/', 'StudentController@destroyAll')->name('admins.students.destroyAll');
+    Route::get('/room/{roomStudent}', 'StudentController@filterDataStudent')->name('filterStudent');
+    Route::any('/students/form', 'StudentController@filterDataForm')->name('filterDataForm');
+});
+//ROTAS DE STUDENTS /////////////////////////////////////////////////////////////////////////////////////////////////

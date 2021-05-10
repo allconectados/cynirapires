@@ -60,6 +60,27 @@ class DestroyService implements DestroyInterface
         }
     }
 
+    public function destroyDataAll($model)
+    {
+        // Retorna o valor do input checkbox
+        $delete = $this->request->input('delete');
+
+        if ($this->request->input('delete')) {
+            $deletes = $model->whereIn('id', $delete)->delete();
+        } else {
+            $this->message->selectCheckbox();
+            return redirect()->back();
+        }
+
+        if ($deletes) {
+            $this->message->destroyMessageSuccess();
+            return redirect()->back();
+        } else {
+            $this->message->destroyMessageError();
+            return redirect()->back();
+        }
+    }
+
     public function destroyDataAdministration($id)
     {
         $data = Administration::find($id);

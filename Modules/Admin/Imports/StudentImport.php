@@ -5,9 +5,11 @@ namespace Modules\Admin\Imports;
 use Modules\Admin\Entities\Student;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 
 class StudentImport implements ToModel
 {
+    use Importable;
     /**
     * @param array $item
     *
@@ -15,21 +17,49 @@ class StudentImport implements ToModel
     */
     public function model(array $item)
     {
-        if (Student::where('email', '=', $item[1])->count() > 0) {
+        // Obtem o nome do arquivo sem a extensão
+        $file = basename(request()->file('select_file_student')->getClientOriginalName(), '.'.request()->file('select_file_student')->getClientOriginalExtension());
+
+        // Verifica na tabela students se existe um email igual ao da tabela do excel
+        if (Student::where('email', '=', $item[6])->count() > 0) {
             // Se existir será atualizado na tabela students
-            DB::table('students')->where('email', '=', $item[1])->update(
+            DB::table('students')
+                ->where('email', '=', $item[6])
+                ->where('room', '=', $file)
+                ->update(
+                    [
+                        'number' => $item[0],
+                        'room' => $file,
+                        'name' => nameCase($item[1]),
+                        'ra' => $item[2],
+                        'ra_digit' => $item[3],
+                        'date_of_birth' => $this->transformDate($item[4]),
+                        'email' => '0'.$item[2].$item[3].'sp.al.educacao.sp.gov.br',
+                    ]
+                );
+        } else {
+            // Se não exitir será criado um novo registro na tabela students
+            Student::create(
                 [
-                    'name' => nameCase($item[0]),
-                    'email' => $item[1],
+                    'number' => $item[0],
+                    'room' => $file,
+                    'name' => nameCase($item[1]),
+                    'ra' => $item[2],
+                    'ra_digit' => $item[3],
+                    'date_of_birth' => $this->transformDate($item[4]),
+                    'email' => '0'.$item[2].$item[3].'sp.al.educacao.sp.gov.br',
+                    'status' => titleCase($item[5]),
                 ]
             );
-        }else{
-            Student::create([
-                'code' => uniqid(),
-                'name' => nameCase($item[0]),
-                'email' => $item[1],
+        }
+    }
 
-            ]);
+    public function transformDate($value, $format = 'Y-m-d')
+    {
+        try {
+            return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
+        } catch (\ErrorException $e) {
+            return \Carbon\Carbon::createFromFormat($format, $value);
         }
     }
 }

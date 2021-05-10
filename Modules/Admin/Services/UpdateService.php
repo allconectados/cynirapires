@@ -228,33 +228,56 @@ class UpdateService implements UpdateInterface
         }
     }
 
+
     /**
-     * @param  FormRequest  $classFormRequest
+     * @param FormRequest $classFormRequest
+     * @param Model $model
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    public function updateDataStudent(FormRequest $classFormRequest, $id)
+    public function updateDataStudent($classFormRequest, Model $model, $id)
     {
         $dataForm = $this->request->all();
 
-        $data = Student::find($id);
+        $data = $model->find($id);
 
-        $data->update($dataForm);
-
-        $update = User::where('code', '=', $data->code)
-            ->update(
+        if ($this->request->get('status') == 'Remanejamento' || $this->request->get('status') == 'TROCA NÃO OFICIAL') {
+            $create = $data->create(
                 [
-                    'room_id' => $this->request->input('room_id'),
-                    'name' => $this->request->input('name'),
-                    'email' => $this->request->input('email')
-                ]);
+                    'active' => 1,
+                    'room' => $this->request->room,
+                    'number' => $this->request->number,
+                    'name' => $this->request->name,
+                    'username' => $this->request->username,
+                    'ra' => $this->request->ra,
+                    'ra_digit' => $this->request->ra_digit,
+                    'date_of_birth' => $this->request->date_of_birth,
+                    'email_google' => $this->request->email_google,
+                    'email_microsoft' => $this->request->email_microsoft,
+                    'status' => 'Ativo',
+                    'password' => $data->password,
+                ]
+            );
+            if ($create) {
+                $data->update(['status' => $this->request->status, 'active' => 0]);
+                $this->message->studentRemanejadoSuccess();
+                return redirect()->back();
+            } else {
+                $this->message->studentRemanejadoError();
+                return redirect()->back();
+            }
 
-        if ($update) {
-            $this->message->updateMessageSuccess();
-            return redirect()->back();
+
         } else {
-            $this->message->updateMessageError();
-            return redirect()->back();
+            $update = $data->update($dataForm);
+
+            if ($update) {
+                $this->message->updateMessageSuccess();
+                return redirect()->back();
+            } else {
+                $this->message->updateMessageError();
+                return redirect()->back();
+            }
         }
     }
 

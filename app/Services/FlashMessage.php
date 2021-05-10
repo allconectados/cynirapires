@@ -70,4 +70,14 @@ class FlashMessage
     {
         return Alert::warning('Atenção!', 'Por favor, selecione um registro!');
     }
+
+    public function studentRemanejadoSuccess()
+    {
+        return toast('Aluno remanejado com sucesso!', 'success')->timerProgressBar();
+    }
+
+    public function studentRemanejadoError()
+    {
+        return toast('Não foi possível remanejar o aluno!', 'error')->timerProgressBar();
+    }
 }

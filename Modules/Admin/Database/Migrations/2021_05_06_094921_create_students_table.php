@@ -14,7 +14,7 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->uuid('id')->index();
+            $table->id('id');
             $table->boolean('active')->default(1);
             $table->string('number');
             $table->string('room');

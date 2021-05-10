@@ -53,11 +53,12 @@ interface UpdateInterface
     public function updateDataTeacher(FormRequest $classFormRequest, $id);
 
     /**
-     * @param FormRequest $classFormRequest
+     * @param $classFormRequest
+     * @param  Model  $model
      * @param $id
      * @return mixed
      */
-    public function updateDataStudent(FormRequest $classFormRequest, $id);
+    public function updateDataStudent($classFormRequest, Model $model, $id);
 
     /**
      * @param FormRequest $classFormRequest
