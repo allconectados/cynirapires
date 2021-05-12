@@ -10,6 +10,13 @@
                     </a>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12 col-lg col-xl">
+                <div class="form-group">
+                    <a class="btn btn-secondary btn-sm btn-block" href="{{route('admins.years.index')}}">
+                        Voltar
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container">

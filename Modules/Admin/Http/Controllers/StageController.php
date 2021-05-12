@@ -98,7 +98,7 @@ class StageController extends Controller
             alert()->warning('Atenão', 'Você já adicionou este Tipo de Ensino');
             return redirect()->back();
         } else {
-            return $this->store->store($classFormRequest, $this->model);
+            return $this->store->storeData($classFormRequest, $this->model);
 
         }
     }

@@ -1,5 +1,5 @@
 <div class="container">
-    <h6 class="card-title text-center">Editar sala - {{$room->title}}</h6>
+    <h6 class="card-title text-center">Editar sala - {{$item->title}}</h6>
 
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="form-group">
@@ -14,7 +14,7 @@
                             <input type="hidden" name="year_id" value="{{$year->id}}">
                             <input type="hidden" name="stage_id" value="{{$stage->id}}">
                             <input type="hidden" name="serie_id" value="{{$serie->id}}">
-                            <input type="hidden" name="room_id" value="{{$room->id}}">
+                            <input type="hidden" name="room_id" value="{{$item->id}}">
                             <table class="table">
                                 <tr>
                                     <td><label>Importar</label></td>
@@ -33,10 +33,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-sm btn-block btn-info" data-toggle="modal"
-                    data-target="#{{ 'modal_' . $room->id }}">
+                    data-target="#{{ 'modal_discipline' . $item->id }}">
                 Visualizar Lista
             </button>
-            @include('admin::rooms._modals.disciplines', ['room' => $room])
+            @include('admin::rooms._modals.disciplines', ['item' => $item])
             <table class="table table-sm table-bordered table-hover">
                 <thead>
                 <tr>
@@ -48,7 +48,7 @@
                 </thead>
                 <tbody>
                 @foreach($disciplines->sortBy('title') as $discipline)
-                    @if ($room->id === $discipline->room_id)
+                    @if ($item->id === $discipline->room_id)
                         <tr>
                             <td> {{$discipline->title}} </td>
                             <form name="form"
@@ -136,7 +136,7 @@
             let nome = fileInput.get(0).files["0"].name;
 
 // Retorna o nome da sala com a extensão .xlsx para verificar se é igual ao nome do arquivoDiscipline
-            let filename = "{{$room->title}}.xlsx";
+            let filename = "{{$item->title}}.xlsx";
 
 // Verifica a extensão do arquivoDiscipline é .xlsx
             if (validoDiscipline.test(nome)) {

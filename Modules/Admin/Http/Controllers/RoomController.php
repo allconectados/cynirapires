@@ -185,13 +185,13 @@ class RoomController extends Controller
 
         $serie = $this->url->urlData($this->serie, $serie);
 
-        $room = $this->edit->editData($this->model, $id);
+        $item = $this->edit->editData($this->model, $id);
 
         $disciplines = Discipline::select('id','title', 'teacher_id', 'room_id')
             ->where('year_id', '=', $year->id)
             ->where('stage_id', '=', $stage->id)
             ->where('serie_id', '=', $serie->id)
-            ->where('room_id', '=', $room->id)
+            ->where('room_id', '=', $item->id)
             ->get();
 
         $teachers = DB::table('teachers')
@@ -199,7 +199,7 @@ class RoomController extends Controller
             ->pluck('id', 'name');
 
         return view('admin::rooms.edit',
-            compact('titlePage','year', 'stage', 'serie', 'room', 'disciplines', 'teachers'
+            compact('titlePage','year', 'stage', 'serie', 'item', 'disciplines', 'teachers'
             ));
     }
 
@@ -213,6 +213,8 @@ class RoomController extends Controller
 
         $room = $this->url->urlData($this->model, $room);
 
+        $titlePage = 'Editar Turmas';
+
         $students = DB::table('students')->where('room', '=', $room->title)
             ->orderBy('room', 'asc')
             ->orderByRaw('(room - number) desc')
@@ -220,17 +222,18 @@ class RoomController extends Controller
             ->get();
 
         return view('admin::rooms.students',
-            compact('year', 'stage', 'serie', 'room', 'students'
+            compact('titlePage','year', 'stage', 'serie', 'room', 'students'
             ));
     }
 
     public function destroy($id)
     {
         // Retorna o room_id e compara com o id do room
+        $discipline_id = DB::table('disciplines')->where('room_id', '=', $id)->first();
         $aluno_id = DB::table('students')->where('room', '=', $id)->first();
 
-        if ($aluno_id) {
-            alert()->warning('Atenão', 'Não foi possível excluír o registro, existem alunos relacionados!');
+        if ($discipline_id || $aluno_id) {
+            alert()->warning('Atenão', 'Não foi possível excluír o registro, existem registros relacionados!');
             return redirect()->back();
         } else {
             return $this->destroy->destroyData($this->model, $id);

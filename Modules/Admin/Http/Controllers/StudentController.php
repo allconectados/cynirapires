@@ -19,6 +19,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
+    private $orderBy = 'name';
+    private $column = 'name';
+
+    private $direction = 'asc';
     /**
      * @var Student
      */
@@ -72,7 +76,7 @@ class StudentController extends Controller
             ->orderBy('room', 'asc')
             ->orderByRaw('(room - number) desc')
             ->orderBy('number', 'asc')
-            ->paginate(15);
+            ->paginate(100);
 
         $roomStudents = DB::table('students')->orderBy('room', 'asc')
             ->pluck('room', 'room');
@@ -131,12 +135,14 @@ class StudentController extends Controller
     {
         $student = $this->edit->editData($this->model, $id);
 
+        $titlePage = 'Editar Estudante: '. $student->name;
+
         $rooms = DB::table('rooms')
             ->select('id', 'title')
             ->orderBy('title', 'asc')
             ->pluck('title', 'title');
 
-        return view('admin::students.edit', compact('student', 'rooms'));
+        return view('admin::students.edit', compact('titlePage','student', 'rooms'));
     }
 
 
@@ -162,7 +168,7 @@ class StudentController extends Controller
 
     public function filterDataStudent($roomStudent)
     {
-        $students = $this->filter->filterDataStudent(
+        $data = $this->filter->filterDataStudent(
             $this->model,
             $roomStudent,
             100
@@ -173,31 +179,30 @@ class StudentController extends Controller
         $roomStudents = DB::table('students')->orderBy('room', 'asc')
             ->pluck('room', 'room');
 
-        $active = 'Listando registros por sala: '.$roomStudent;
+        $titlePage = 'Listando registros por sala: '.$roomStudent;
 
         return view(
-            'admins.students.index',
+            'admin::students.index',
             compact(
-                'students',
-                'active',
+                'titlePage','data',
                 'rooms',
                 'roomStudents',
                 'rooms',
             )
         );
     }
-    public function filterDataForm()
+    public function filterDataForm(Request $request)
     {
-        $students = $this->filter->filterDataForm(
+        $data = $this->filter->filterDataForm(
             $this->model,
             $this->column,
             $this->orderBy,
             $this->direction,
             );
 
-        $search = $this->request->input('search');
+        $search = $request->input('search');
 
-        $active = 'Listando registros por nome: ' . $search;
+        $titlePage = 'Listando registros por nome: ' . $search;
 
         $rooms = DB::table('rooms')->orderBy('title', 'asc')->pluck('title', 'title');
 
@@ -206,7 +211,7 @@ class StudentController extends Controller
 
         return view(
             'admin::students..index',
-            compact('students', 'active', 'rooms', 'roomStudents')
+            compact('data', 'titlePage', 'rooms', 'roomStudents')
         );
     }
 }

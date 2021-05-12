@@ -10,71 +10,20 @@
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                @include('admin::students._forms.import')
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <form method="GET" action="{{route('filterDataForm')}}">
-                        <div class="input-group">
-                            <input id="title" name="search" type="search"
-                                   class="form-control form-control-sm textDateTitle" autocomplete="on"
-                                   placeholder="Filtrar por nome">
-
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary btn-primary btn-sm" type="submit"
-                                        style="box-shadow: none !important;">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
-                <div class="form-group">
-                    <select name="roomStudent" style="border: 1px solid #0097A7 !important;"
-                            class="custom-select custom-select-sm"
-                            onchange="location = this.value;">
-                        <option selected>Filtrar por sala</option>
-                        @foreach ($roomStudents as $roomStudent)
-                            <option value="{{route('filterStudent', $roomStudent)}}">
-                                <a href="{{route('filterStudent', $roomStudent)}}">
-                                    {{$roomStudent}}
-                                </a>
-                            </option>
-                        @endforeach
-                    </select>
+                    <a class="btn btn-secondary btn-sm btn-block"
+                       href="{{route('admins.rooms.index', [$year->url, $stage->url, $serie->url])}}">
+                        Voltar
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">--}}
-{{--                @include('admin::students._forms.create')--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="container">
         <form action="{{route('admins.students.destroyAll')}}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11">
-                    <div class="form-group">
-                        <div class="pagination">
-                            @if(isset($data))
-                                {!! $data->appends(Request::all())->links() !!}
-                            @else
-                                {!! $data->links() !!}
-                            @endif
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
                     <div class="form-group">
                         <button type="submit" class="btn btn-danger btn-sm marcar"
@@ -99,8 +48,6 @@
                             <th scope="col" style="width: 10px">Sala</th>
                             <th scope="col" style="width: 10px">Nº</th>
                             <th scope="col">Nome</th>
-                            <th scope="col" style="width: 20px">RA</th>
-                            <th scope="col" style="width: 10px">Díg.</th>
                             <th scope="col">Email</th>
                             <th scope="col" style="width: 100px">Status</th>
                             <th scope="col" style="width: 50px">Estado</th>
@@ -109,7 +56,7 @@
                         </tr>
                         </thead>
                         <tbody style="font-size: 90% !important;">
-                        @foreach($data as $item)
+                        @foreach($students as $item)
                             <tr>
                                 <td class="text-center">
                                     <label class="control control--checkbox">
@@ -121,8 +68,6 @@
                                 <td class="text-truncate text-center">{{$item->room}}</td>
                                 <td class="text-truncate text-center">{{$item->number}}</td>
                                 <td class="text-truncate">{{$item->name}}</td>
-                                <td class="text-truncate text-center">{{$item->ra}}</td>
-                                <td class="text-truncate text-center">{{$item->ra_digit}}</td>
                                 <td class="text-truncate">{{$item->email}}</td>
                                 <td class="text-truncate">{{$item->status}}</td>
                                 <td class="text-truncate text-center">
@@ -147,6 +92,7 @@
         </form>
     </div>
     <br><br><br>
+
 @endsection
 @push('scripts')
     <script>
