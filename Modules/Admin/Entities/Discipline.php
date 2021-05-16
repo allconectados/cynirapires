@@ -2,23 +2,18 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Discipline extends Model
 {
     protected $table = 'disciplines';
 
-    protected $primaryKey = 'id';
-
-    public $incrementing = false;
-
     protected $dates = ['created_at', 'updated_at'];
 
     protected $guarded = [];
 
     protected $casts = [
-        'id' => 'string',
+        'id' => 'int',
     ];
 
     protected $fillable = [
@@ -26,7 +21,7 @@ class Discipline extends Model
         'stage_id',
         'serie_id',
         'room_id',
-        'teacher_id',
+        'teacher',
         'title',
         'url',
         'code',
@@ -55,11 +50,5 @@ class Discipline extends Model
     public function teacher()
     {
         return $this->belongsTo(Teacher::class)->orderBy('name', 'asc');
-    }
-
-    public function teachers()
-    {
-        return $this->belongsToMany(Teacher::class, 'discipline_teacher')
-            ->withPivot(['teacher_id'])->withTimestamps();
     }
 }

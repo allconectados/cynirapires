@@ -2,16 +2,19 @@
 
 namespace Modules\Teacher\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    use HasFactory;
-
     protected $table = 'rooms';
-    protected $primaryKey = 'id';
-    public $incrementing = false;
+
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'id' => 'int',
+    ];
 
     protected $fillable = [
         'year_id',
@@ -36,15 +39,8 @@ class Room extends Model
         return $this->belongsTo(Serie::class)->orderBy('title', 'asc');
     }
 
-    public function disciplines()
+    public function teacher()
     {
-        return $this->hasMany(Discipline::class, 'room_id', 'id');
-    }
-
-    public function atividades()
-    {
-        return $this->hasMany(Atividade::class, 'room_id', 'id')
-            ->where('teacher_id', '=', auth()->guard('teacher')->user()->id)
-            ->orderBy('date', 'desc');
+        return $this->belongsTo(Teacher::class)->orderBy('name', 'asc');
     }
 }

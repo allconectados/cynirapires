@@ -8,7 +8,7 @@ use Modules\Admin\Entities\Serie;
 use Modules\Admin\Entities\Stage;
 use Modules\Admin\Entities\Year;
 use Modules\Admin\Http\Requests\SerieStoreFormRequest;
-use Modules\Admin\Http\Requests\SerieUpdateFormRequest;
+use Modules\Admin\Http\Requests\BimestreUpdateFormRequest;
 use Modules\Admin\Services\DestroyService;
 use Modules\Admin\Services\EditService;
 use Modules\Admin\Services\GetUrl;
@@ -86,9 +86,9 @@ class SerieController extends Controller
 
         $stage = $this->url->urlData($this->stage, $stage);
 
-        $data = $stage->series->where('year_id', $year->id)->where('stage_id', $stage->id);
+        $series = $stage->series->where('year_id', $year->id)->where('stage_id', $stage->id);
 
-        return view('admin::series.index', compact('titlePage', 'data', 'year', 'stage'));
+        return view('admin::series.index', compact('titlePage', 'series', 'year', 'stage'));
     }
 
     public function store(SerieStoreFormRequest $classFormRequest)

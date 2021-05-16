@@ -111,10 +111,7 @@ class RoomController extends Controller
 
         $serie = $this->url->urlData($this->serie, $serie);
 
-        $rooms = $serie->rooms
-            ->where('year_id', $year->id)
-            ->where('stage_id', $stage->id)
-            ->where('serie_id', $serie->id);
+        $rooms = $serie->rooms->where('year_id', $year->id)->where('stage_id', $stage->id)->where('serie_id', $serie->id);
 
         return view('admin::rooms.index', compact('titlePage','year', 'stage', 'serie', 'rooms'));
     }
@@ -185,21 +182,20 @@ class RoomController extends Controller
 
         $serie = $this->url->urlData($this->serie, $serie);
 
-        $item = $this->edit->editData($this->model, $id);
+        $room = $this->edit->editData($this->model, $id);
 
-        $disciplines = Discipline::select('id','title', 'teacher_id', 'room_id')
+        $disciplines = Discipline::select('year_id','stage_id','serie_id','id','title', 'teacher', 'room_id')
             ->where('year_id', '=', $year->id)
             ->where('stage_id', '=', $stage->id)
             ->where('serie_id', '=', $serie->id)
-            ->where('room_id', '=', $item->id)
+            ->where('room_id', '=', $room->id)
             ->get();
 
-        $teachers = DB::table('teachers')
-            ->orderBy('name', 'asc')
-            ->pluck('id', 'name');
+        $teachers = DB::table('teachers')->select('name')
+            ->orderBy('name', 'asc')->get();
 
         return view('admin::rooms.edit',
-            compact('titlePage','year', 'stage', 'serie', 'item', 'disciplines', 'teachers'
+            compact('titlePage','year', 'stage', 'serie', 'room', 'disciplines', 'teachers'
             ));
     }
 

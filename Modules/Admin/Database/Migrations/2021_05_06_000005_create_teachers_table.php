@@ -15,7 +15,6 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id('id');
-            $table->string('ano')->default(date('Y'));
             $table->string('code')->unique();
             $table->string('name');
             $table->string('cargo');

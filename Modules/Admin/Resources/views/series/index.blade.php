@@ -40,38 +40,39 @@
                             <tr>
                                 <th scope="col" style="width: 7.0rem">Código</th>
                                 <th scope="col">Título</th>
-                                <th scope="col" style="width: 10.0rem">Gerenciar Períodos</th>
-                                <th scope="col" style="width: 10.0rem">Gerenciar Turmas</th>
+                                <th scope="col">Turmas</th>
+                                <th scope="col" style="width: 10.0rem">Gerenciar</th>
                                 <th scope="col" style="width: 1.0rem">Excluír</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $item)
+                            @foreach($series as $serie)
                                 <tr>
-                                    <td class="text-truncate text-center">{{$item->code}}</td>
-                                    <td class="text-truncate">{{$item->title}}</td>
-                                    <td>
-                                        <a href="{{route('admins.periods.index', [$year->url, $stage->url, $item->url])}}"
-                                           class="btn btn-sm btn-block btn-secondary">
-                                            Períodos
-                                        </a>
+                                    <td class="text-truncate text-center">{{$serie->code}}</td>
+                                    <td class="text-truncate">{{$serie->title}}</td>
+                                    <td class="text-truncate">
+                                        @forelse($serie->rooms as $room)
+                                            <span>{{$room->title}}</span> /
+                                        @empty
+                                            Nenhum registro relacionado
+                                        @endforelse
                                     </td>
                                     <td>
-                                        <a href="{{route('admins.rooms.index', [$year->url, $stage->url, $item->url])}}"
+                                        <a href="{{route('admins.rooms.index', [$year->url, $stage->url, $serie->url])}}"
                                            class="btn btn-sm btn-block btn-secondary">
                                             Turmas
                                         </a>
                                     </td>
                                     <td>
                                         <a class="btn btn-danger btn-sm" data-toggle="modal"
-                                           data-target="#{{ 'modal_' . $item->id }}">
+                                           data-target="#{{ 'modal_' . $serie->id }}">
                                                 <span style="cursor: pointer">
                                                     <i class="fas fa-trash"></i>
                                                 </span>
                                         </a>
                                     </td>
                                 </tr>
-                                @include('admin::series._modals.destroy', ['item' => $item])
+                                @include('admin::series._modals.destroy', ['serie' => $serie])
                             @endforeach
                             </tbody>
                         </table>

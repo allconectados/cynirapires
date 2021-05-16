@@ -2,16 +2,19 @@
 
 namespace Modules\Teacher\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Stage extends Model
 {
-    use HasFactory;
-
     protected $table = 'stages';
-    protected $primaryKey = 'id';
-    public $incrementing = false;
+
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'id' => 'int',
+    ];
 
     protected $fillable = [
         'year_id',
@@ -24,33 +27,9 @@ class Stage extends Model
         return $this->belongsTo(Year::class)->orderBy('title', 'asc');
     }
 
-    public function salas()
-    {
-        return $this->hasMany(Sala::class, 'stage_id', 'id')
-            ->orderBy('title', 'asc');
-    }
-
-    public function schedules()
-    {
-        return $this->hasMany(Schedule::class, 'stage_id', 'id')
-            ->orderBy('title', 'asc');
-    }
-
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class, 'stage_id', 'id')
-            ->orderBy('title', 'asc');
-    }
-
     public function series()
     {
         return $this->hasMany(Serie::class, 'stage_id', 'id')
-            ->orderBy('title', 'asc');
-    }
-
-    public function periods()
-    {
-        return $this->hasMany(Period::class, 'stage_id', 'id')
             ->orderBy('title', 'asc');
     }
 
@@ -64,17 +43,5 @@ class Stage extends Model
     {
         return $this->hasMany(Discipline::class, 'stage_id', 'id')
             ->orderBy('title', 'asc');
-    }
-
-    public function informes()
-    {
-        return $this->hasMany(Informe::class, 'stage_id', 'id')
-            ->orderBy('created_at', 'desc');
-    }
-
-    public function atividades()
-    {
-        return $this->hasMany(Atividade::class, 'stage_id', 'id')
-            ->orderBy('date', 'desc');
     }
 }

@@ -78,9 +78,9 @@ class StageController extends Controller
 
         $year = $this->url->urlData($this->year, $year);
 
-        $data = Stage::paginate(10);
+        $stages = $year->stages->where('year_id', $year->id);
 
-        return view('admin::stages.index', compact('titlePage', 'data', 'year'));
+        return view('admin::stages.index', compact('titlePage', 'stages', 'year'));
     }
 
     public function store(StageStoreFormRequest $classFormRequest)
@@ -94,7 +94,8 @@ class StageController extends Controller
             ->where('title', '=', $title)
             ->first();
 
-        if (isset($stage) && $stage->year_id == request()->input('year_id') && $stage->title == request()->input('title')) {
+        if (isset($stage) && $stage->year_id == request()->input('year_id')
+            && $stage->title == request()->input('title')) {
             alert()->warning('Atenão', 'Você já adicionou este Tipo de Ensino');
             return redirect()->back();
         } else {

@@ -39,14 +39,6 @@ Route::prefix('painel/admin')->middleware('auth')->group(function () {
 });
 
 Route::prefix('painel/admin')->middleware('auth')->group(function () {
-    Route::get('/{year}/{stage}/{serie}/periods', 'PeriodController@index')->name('admins.periods.index');
-    Route::post('/periods/store', 'PeriodController@store')->name('admins.periods.store');
-    Route::get('/periods/{id}/edit', 'PeriodController@edit')->name('admins.periods.edit');
-    Route::put('/periods/update/{id}','PeriodController@update')->name('admins.periods.update');
-    Route::delete('/periods/destroy/{id}', 'PeriodController@destroy')->name('admins.periods.destroy');
-});
-
-Route::prefix('painel/admin')->middleware('auth')->group(function () {
     Route::get('/{year}/{stage}/{serie}/rooms', 'RoomController@index')->name('admins.rooms.index');
     Route::get('/{year}/{stage}/{serie}/{room}/students', 'RoomController@students')->name('admins.rooms.students');
     Route::post('/rooms/import', 'RoomController@import')->name('admins.rooms.import');

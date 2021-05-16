@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <a class="btn btn-secondary btn-sm btn-block" href="{{route('admins.rooms.index', [$year->url, $stage->url, $serie->url, $item->url])}}">
+                    <a class="btn btn-secondary btn-sm btn-block" href="{{route('admins.rooms.index', [$year->url, $stage->url, $serie->url, $room->url])}}">
                         Voltar
                     </a>
                 </div>

@@ -10,7 +10,15 @@ body {
     color: #455A64 !important;
 }
 
-a{
+/*STYLE DA TABELA TARGET*/
+.target.table th, .target.table td, .target.table td input {
+    height: 25px;
+    font-size: 130%;
+    padding: 0 !important;
+    border-top: 1px solid #dee2e6;
+}
+
+a {
     color: #00796b !important;
     text-decoration: none !important;
 }
@@ -118,6 +126,13 @@ a{
 
 #cke_1_contents, #cke_2_contents {
     min-height: 400px !important;
+}
+
+.table-target {
+    max-width: 3rem;
+    text-align: center;
+    font-size: 120% !important;
+    font-weight: bold;
 }
 
 h6.label-custom {

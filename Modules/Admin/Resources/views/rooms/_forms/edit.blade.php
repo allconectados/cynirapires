@@ -1,5 +1,5 @@
 <div class="container">
-    <h6 class="card-title text-center">Editar sala - {{$item->title}}</h6>
+    <h6 class="card-title text-center">Editar sala - {{$room->title}}</h6>
 
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="form-group">
@@ -14,7 +14,7 @@
                             <input type="hidden" name="year_id" value="{{$year->id}}">
                             <input type="hidden" name="stage_id" value="{{$stage->id}}">
                             <input type="hidden" name="serie_id" value="{{$serie->id}}">
-                            <input type="hidden" name="room_id" value="{{$item->id}}">
+                            <input type="hidden" name="room_id" value="{{$room->id}}">
                             <table class="table">
                                 <tr>
                                     <td><label>Importar</label></td>
@@ -33,10 +33,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-sm btn-block btn-info" data-toggle="modal"
-                    data-target="#{{ 'modal_discipline' . $item->id }}">
+                    data-target="#{{ 'modal_discipline' . $room->id }}">
                 Visualizar Lista
             </button>
-            @include('admin::rooms._modals.disciplines', ['item' => $item])
+            @include('admin::rooms._modals.disciplines', ['room' => $room])
             <table class="table table-sm table-bordered table-hover">
                 <thead>
                 <tr>
@@ -48,7 +48,7 @@
                 </thead>
                 <tbody>
                 @foreach($disciplines->sortBy('title') as $discipline)
-                    @if ($item->id === $discipline->room_id)
+                    @if ($room->id === $discipline->room_id)
                         <tr>
                             <td> {{$discipline->title}} </td>
                             <form name="form"
@@ -57,40 +57,30 @@
                                 @csrf
                                 @method('PUT')
                                 <td>
-                                    @if ($discipline->teacher_id != null)
-                                        <select name="teacher_id"
-                                                class="form-control form-control-sm text-success"
-                                                onchange='this.form.submit()'
-                                                style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
-                                            <option value="{{$discipline->teacher->id}}">
-                                                {{$discipline->teacher->name}}
-                                            </option>
-                                            <option name="teacher_id" value="" class="text-danger">
-                                                Selecione
-                                            </option>
-                                            @foreach($teachers as $teacher => $key)
-                                                <option value="{{$key}}"
-                                                        class="text-success">{{$teacher}}</option>
+                                    @if ($discipline->teacher != null)
+                                        <select name="teacher" class="form-control form-control-sm text-success"
+                                                onchange='this.form.submit()' style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
+                                            <option value="{{$discipline->teacher}}">{{$discipline->teacher}}</option>
+                                            <option name="teacher" value="" class="text-danger">Selecione</option>
+                                            @foreach($teachers as $teacher)
+                                                <option value="{{$teacher->name}}">{{$teacher->name}}</option>
                                             @endforeach
                                         </select>
                                     @else
-                                        <select name="teacher_id"
-                                                class="form-control form-control-sm"
-                                                onchange='this.form.submit()'
-                                                style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
+                                        <select name="teacher" class="form-control form-control-sm"
+                                                onchange='this.form.submit()' style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                             <option value="">Selecione</option>
-                                            @foreach($teachers as $teacher => $key)
-                                                <option value="{{$key}}"
-                                                        class="text-success">{{$teacher}}</option>
+                                            @foreach($teachers as $teacher)
+                                                <option value="{{$teacher->name}}">{{$teacher->name}}</option>
                                             @endforeach
                                         </select>
                                     @endif
                                 </td>
                             </form>
-                            @if ($discipline->room_id != null && $discipline->teacher_id != null)
+                            @if ($discipline->room_id != null && $discipline->teacher != null)
                                 <td class="text-center">
                                                  <span class="text-success">
-                                                {{\Carbon\Carbon::parse($discipline->teacher->date_initial)->format('d/m')}}
+                                                {{\Carbon\Carbon::parse($discipline->date_initial)->format('d/m')}}
                                             </span>
                                 </td>
                             @else
@@ -136,7 +126,7 @@
             let nome = fileInput.get(0).files["0"].name;
 
 // Retorna o nome da sala com a extensão .xlsx para verificar se é igual ao nome do arquivoDiscipline
-            let filename = "{{$item->title}}.xlsx";
+            let filename = "{{$room->title}}.xlsx";
 
 // Verifica a extensão do arquivoDiscipline é .xlsx
             if (validoDiscipline.test(nome)) {

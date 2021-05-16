@@ -292,9 +292,6 @@ class UpdateService implements UpdateInterface
 
         $data = Discipline::find($id);
 
-        // Atualizar tabela pivot discipline_teacher
-        $data->teachers()->sync($this->request->get('teachers'));
-
         //Altera os dados de registro no banco
         $update = $data->update($dataForm);
 

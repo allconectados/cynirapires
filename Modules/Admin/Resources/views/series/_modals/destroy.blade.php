@@ -1,6 +1,6 @@
-<div id="{{ 'modal_' . $item->id }}" class="modal fade" data-keyboard="false" data-backdrop="static">
+<div id="{{ 'modal_' . $serie->id }}" class="modal fade" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-confirm">
-        <form action="{{route('admins.series.destroy', $item->id) }}" method="post">
+        <form action="{{route('admins.series.destroy', $serie->id) }}" method="post">
             @csrf
             @method('DELETE')
             <div class="modal-content">

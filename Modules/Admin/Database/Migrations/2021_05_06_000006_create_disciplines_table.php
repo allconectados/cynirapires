@@ -32,9 +32,7 @@ class CreateDisciplinesTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->foreign('teacher_id')->references('id')->on('teachers')
-                ->onDelete('cascade');
+            $table->string('teacher')->nullable();
 
             $table->string('code')->unique();
             $table->string('title');

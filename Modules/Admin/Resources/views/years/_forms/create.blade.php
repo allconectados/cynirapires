@@ -7,7 +7,6 @@
         <div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
             <form action="{{route('admins.years.store') }}" method="post">
                 @csrf
-                <input type="hidden" name="code" class="form-control form-control-sm" value="{{uniqid()}}" readonly>
                 <button type="submit" name="title" value="{{date('Y')}}"
                         class="btn btn-sm btn-primary btn-block">Novo Ano
                 </button>

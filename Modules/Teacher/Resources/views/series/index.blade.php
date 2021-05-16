@@ -35,7 +35,7 @@
             @forelse($series as $serie)
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom p-3">
                     <div class="form-group">
-                        <a href="{{route('teachers.periods.index', [$year->url, $stage->url, $serie->url])}}"
+                        <a href="{{route('teachers.rooms.index', [$year->url, $stage->url, $serie->url])}}"
                            class="btn btn-sm btn-block btn-info">
                             {{$serie->title}}
                         </a>

@@ -62,9 +62,9 @@ class YearController extends Controller
     {
         $titlePage = 'Gerenciar Ano';
 
-        $data = Year::paginate(10);
+        $years = Year::paginate(2);
 
-        return view('admin::years.index', compact('titlePage', 'data'));
+        return view('admin::years.index', compact('titlePage', 'years'));
     }
 
     public function store(YearStoreFormRequest $classFormRequest)

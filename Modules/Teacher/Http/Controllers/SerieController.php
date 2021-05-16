@@ -5,9 +5,6 @@ namespace Modules\Teacher\Http\Controllers;
 
 
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
-use Modules\Teacher\Entities\Room;
-use Modules\Teacher\Entities\Serie;
 use Modules\Teacher\Entities\Stage;
 use Modules\Teacher\Entities\Year;
 use Modules\Teacher\Services\GetUrl;

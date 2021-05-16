@@ -50,15 +50,15 @@
     </div>
     <div class="container">
         <div class="row">
-            @forelse($rooms as $item)
+            @forelse($rooms as $room)
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 border-bottom p-3">
                     <div class="form-group">
-                        <span class="btn btn-sm btn-block btn-default" style="cursor: initial">{{$item->title}}</span>
+                        <span class="btn btn-sm btn-block btn-default" style="cursor: initial">{{$room->title}}</span>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                             <div class="form-group">
-                                <a href="{{route('admins.rooms.edit', [$year->url,$stage->url,$serie->url,$item->id])}}"
+                                <a href="{{route('admins.rooms.edit', [$year->url,$stage->url,$serie->url,$room->id])}}"
                                    class="btn btn-sm btn-block btn-warning">
                                     Gerenciar
                                 </a>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                             <div class="form-group">
-                                <a href="{{route('admins.rooms.students', [$year->url,$stage->url,$serie->url,$item->url])}}"
+                                <a href="{{route('admins.rooms.students', [$year->url,$stage->url,$serie->url,$room->url])}}"
                                    class="btn btn-sm btn-block btn-info">
                                     Alunos
                                 </a>
@@ -75,12 +75,12 @@
                         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                             <div class="form-group">
                                 <a class="btn btn-sm btn-block btn-danger" data-toggle="modal"
-                                   data-target="#{{ 'modal_room' . $item->id }}">
+                                   data-target="#{{ 'modal_room' . $room->id }}">
                                                 Excluír
                                 </a>
                             </div>
                         </div>
-                        @include('admin::rooms._modals.destroy', ['item' => $item])
+                        @include('admin::rooms._modals.destroy', ['room' => $room])
                     </div>
                 </div>
             @empty

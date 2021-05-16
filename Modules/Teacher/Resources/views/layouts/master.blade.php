@@ -89,6 +89,7 @@
 
 
 {{-- Laravel Mix - JS File --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('scripts')
 @include('sweetalert::alert')

@@ -3,7 +3,6 @@
 namespace Modules\Admin\Providers;
 
 use Modules\Admin\Entities\Discipline;
-use Modules\Admin\Entities\Period;
 use Modules\Admin\Entities\Reservation;
 use Modules\Admin\Entities\Room;
 use Modules\Admin\Entities\Sala;
@@ -14,7 +13,6 @@ use Modules\Admin\Entities\Student;
 use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Entities\Year;
 use Modules\Admin\Observers\DisciplineObserver;
-use Modules\Admin\Observers\PeriodObserver;
 use Modules\Admin\Observers\ReservationObserver;
 use Modules\Admin\Observers\RoomObserver;
 use Modules\Admin\Observers\SalaObserver;
@@ -55,6 +53,5 @@ class ObserverServiceProvider extends ServiceProvider
         Serie::observe(SerieObserver::class);
         Room::observe(RoomObserver::class);
         Discipline::observe(DisciplineObserver::class);
-        Period::observe(PeriodObserver::class);
     }
 }
