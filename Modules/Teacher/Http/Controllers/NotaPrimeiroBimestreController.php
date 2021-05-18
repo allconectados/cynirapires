@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Teacher\Entities\Discipline;
 use Modules\Teacher\Entities\NotaPrimeiroBimestre;
+use Modules\Teacher\Entities\NotaQuintoConceito;
 use Modules\Teacher\Entities\Room;
 use Modules\Teacher\Entities\Serie;
 use Modules\Teacher\Entities\Stage;
@@ -145,10 +146,33 @@ class NotaPrimeiroBimestreController extends Controller
                 'faltas_compensadas' => $faltas_compensadas[$i],
                 'total_de_faltas' => $falta[$i] - $faltas_compensadas[$i],
             ];
-            NotaPrimeiroBimestre::create($datasave);
+            $create = NotaPrimeiroBimestre::create($datasave);
+
+            if ($create) {
+                $saveQuintoConceito = [
+                    'ano' => $ano[$i],
+                    'stage' => $stage[$i],
+                    'serie' => $serie[$i],
+                    'teacher' => $teacher[$i],
+                    'discipline' => $discipline[$i],
+                    'room' => $room[$i],
+                    'number' => $number[$i],
+                    'name' => $name[$i],
+                    'nota_primeiro_bimestre' => $nota[$i] + $nota_participation[$i],
+                    'faltas_primeiro_bimestre' => $falta[$i] - $faltas_compensadas[$i],
+                ];
+
+                $store = NotaQuintoConceito::create($saveQuintoConceito);
+            }
 
         }
-        return redirect()->back();
+        if ($store) {
+            Alert::success('Sucesso!', 'Registros criados com sucesso!');
+            return redirect()->back();
+        } else {
+            Alert::error('Erro!', 'Não foi possível criar os registros!');
+            return redirect()->back();
+        }
 
     }
 
@@ -158,7 +182,6 @@ class NotaPrimeiroBimestreController extends Controller
 
         $student->nota = $request->nota;
         $student->nota_participation = $request->nota_participation;
-        $student->nota_final = $request->nota_final;
         $student->falta = $request->falta;
         $student->faltas_compensadas = $request->faltas_compensadas;
 
@@ -173,18 +196,37 @@ class NotaPrimeiroBimestreController extends Controller
                     'total_de_faltas' => $request->falta[$item] - $request->faltas_compensadas[$item],
                 );
                 $save = NotaPrimeiroBimestre::where('id', $request->id[$item])->first();
-                $update = $save->update($data);
+                $updateBimestre = $save->update($data);
+
+                if ($updateBimestre){
+                    $dataQuintoConceito = array(
+                        'nota_primeiro_bimestre' => $request->nota[$item] + $request->nota_participation[$item],
+                        'faltas_primeiro_bimestre' => $request->falta[$item] - $request->faltas_compensadas[$item],
+                    );
+
+                    $UpdateQuintoConceito = NotaQuintoConceito::where('ano', $request->ano[$item])->where('stage', $request->stage[$item])
+                        ->where('serie', $request->serie[$item])->where('teacher', $request->teacher[$item])
+                        ->where('discipline', $request->discipline[$item])->where('room', $request->room[$item])
+                        ->where('number', $request->number[$item])->where('name', $request->name[$item])
+                        ->first();
+                    $update = $UpdateQuintoConceito->update($dataQuintoConceito);
+
+                    if ($update) {
+                        Alert::success('Sucesso!', 'Registros atualizados com sucesso!');
+                        return redirect()->back();
+                    } else {
+                        Alert::error('Erro!', 'Não foi possível atualizar os registros!');
+                        return redirect()->back();
+                    }
+                }
 
             }
+
+
+
+
         }
-        if ($update) {
-            Alert::success('Sucesso!', 'Registro atualizado com sucesso!');
-            return redirect()->back();
-        } else {
-            Alert::error('Erro!', 'Não foi possível atualizar o registro!');
-            return redirect()->back();
-        }
+
 
     }
-
 }

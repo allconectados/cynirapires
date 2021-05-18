@@ -77,7 +77,7 @@
                                 </a>
                             </td>
                             <td class="text-truncate text-center">
-                                <a href="{{route('teacher.notes.conceito.final.index',
+                                <a href="{{route('teacher.notes.quinto.conceito.index',
                                 [$year->url, $stage->url, $serie->url, $discipline->room->url, $discipline->url])}}">
                                    Fechamento
                                 </a>

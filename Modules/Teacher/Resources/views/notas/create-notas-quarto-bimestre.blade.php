@@ -103,7 +103,7 @@
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 4rem" name="nota[]" class="table-target text-secondary"
-                                           value="{{old('nota')}}" tabindex="1" step='0.5' min="0.5" max="10">
+                                           value="{{old('nota')}}" tabindex="1" step='0.5' min="0" max="10" required>
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
@@ -117,17 +117,17 @@
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="text" style="max-width: 4rem" name="falta[]" class="table-target text-secondary"
-                                           value="{{old('falta')}}" tabindex="3" step='1'>
+                                    <input type="number" style="max-width: 4rem" name="falta[]" class="table-target text-secondary"
+                                           value="{{old('falta')}}" tabindex="3"  step='1' min="0" max="500" required>
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="text" style="max-width: 4rem" name="faltas_compensadas[]" class="table-target text-secondary"
-                                           value="{{old('faltas_compensadas')}}" tabindex="4" step='1'>
+                                    <input type="number" style="max-width: 4rem" name="faltas_compensadas[]" class="table-target text-secondary"
+                                           value="{{old('faltas_compensadas')}}" tabindex="4"  step='1' min="0" max="500">
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="text" style="max-width: 4rem" name="total_de_faltas[]" class="table-target text-secondary"
+                                    <input type="number" style="max-width: 4rem" name="total_de_faltas[]" class="table-target text-secondary"
                                            value="{{old('total_de_faltas')}}" readonly>
                                 </td>
 

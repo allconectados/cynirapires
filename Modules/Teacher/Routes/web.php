@@ -71,13 +71,13 @@ Route::prefix('teacher')->group(function () {
         ->name('teacher.notas.quarto.bimestre.update');
 
     // Notas do Conceito Final
-    Route::get('/dashboard/{year}/{stage}/{serie}/{room}/{discipline}/notas-conceito-final',
-        'NotaConceitoFinalController@index')
-        ->name('teacher.notes.conceito.final.index');
-    Route::post('/dashboard/notas-conceito-final/store', 'NotaConceitoFinalController@store')
-        ->name('teacher.notas.conceito.final.store');
-    Route::put('/dashboard/notas-conceito-final/update/{id}', 'NotaConceitoFinalController@update')
-        ->name('teacher.notas.conceito.final.update');
+    Route::get('/dashboard/{year}/{stage}/{serie}/{room}/{discipline}/notas-quinto-conceito',
+        'NotaQuintoConceitoController@index')
+        ->name('teacher.notes.quinto.conceito.index');
+    Route::post('/dashboard/notas-quinto-conceito/store', 'NotaQuintoConceitoController@store')
+        ->name('teacher.notas.quinto.conceito.store');
+    Route::put('/dashboard/notas-quinto-conceito/update/{id}', 'NotaQuintoConceitoController@update')
+        ->name('teacher.notas.quinto.conceito.update');
 
 //    Route::get('/dashboard/{year}/{stage}/{serie}/{room}/{discipline}/notas-bimestre','NotasBimestreRegularController@notaBimestre')
 //        ->name('teacher.disciplines.notes');
