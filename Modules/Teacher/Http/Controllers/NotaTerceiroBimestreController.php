@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Teacher\Entities\Discipline;
+use Modules\Teacher\Entities\NotaQuintoConceito;
 use Modules\Teacher\Entities\NotaTerceiroBimestre;
 use Modules\Teacher\Entities\Room;
 use Modules\Teacher\Entities\Serie;
@@ -115,6 +116,7 @@ class NotaTerceiroBimestreController extends Controller
 
     public function store()
     {
+        $code = $this->request->code;
         $ano = $this->request->ano;
         $stage = $this->request->stage;
         $serie = $this->request->serie;
@@ -124,12 +126,12 @@ class NotaTerceiroBimestreController extends Controller
         $number = $this->request->number;
         $name = $this->request->name;
         $nota = $this->request->nota;
-        $nota_participation = $this->request->nota_participation;
         $falta = $this->request->falta;
         $faltas_compensadas = $this->request->faltas_compensadas;
 
         for ($i = 0; $i < count($ano); $i++) {
             $datasave = [
+                'code' => $code[$i],
                 'ano' => $ano[$i],
                 'stage' => $stage[$i],
                 'serie' => $serie[$i],
@@ -139,16 +141,37 @@ class NotaTerceiroBimestreController extends Controller
                 'number' => $number[$i],
                 'name' => $name[$i],
                 'nota' => $nota[$i],
-                'nota_participation' => $nota_participation[$i],
-                'nota_final' => $nota[$i] + $nota_participation[$i],
                 'falta' => $falta[$i],
                 'faltas_compensadas' => $faltas_compensadas[$i],
                 'total_de_faltas' => $falta[$i] - $faltas_compensadas[$i],
             ];
-            NotaTerceiroBimestre::create($datasave);
+            $create = NotaTerceiroBimestre::create($datasave);
+
+            if ($create) {
+
+                DB::table('notas_quinto_conceitos')
+                    ->where('ano', $this->request->ano[$i])->where('stage', $this->request->stage[$i])
+                    ->where('serie', $this->request->serie[$i])->where('teacher', $this->request->teacher[$i])
+                    ->where('discipline', $this->request->discipline[$i])->where('room', $this->request->room[$i])
+                    ->where('number', $this->request->number[$i])->where('name',
+                        $this->request->name[$i])->update(
+                        [
+                            'nota_terceiro_bimestre' => $this->request->nota[$i],
+                            'faltas_terceiro_bimestre' => $this->request->falta[$i] - $this->request->faltas_compensadas[$i],
+                        ]
+                    );
+
+
+            }
 
         }
-        return redirect()->back();
+        if ($create) {
+            Alert::success('Sucesso!', 'Registros criados com sucesso!');
+            return redirect()->back();
+        } else {
+            Alert::error('Erro!', 'Não foi possível criar os registros!');
+            return redirect()->back();
+        }
 
     }
 
@@ -156,32 +179,41 @@ class NotaTerceiroBimestreController extends Controller
     {
         $student = NotaTerceiroBimestre::find($id);
 
-        $student->nota = $request->nota;
-        $student->nota_participation = $request->nota_participation;
-        $student->nota_final = $request->nota_final;
-        $student->falta = $request->falta;
-        $student->faltas_compensadas = $request->faltas_compensadas;
+        $student->nota = $this->request->nota;
+        $student->falta = $this->request->falta;
+        $student->faltas_compensadas = $this->request->faltas_compensadas;
 
-        if (count($request->id) > 0) {
-            foreach ($request->id as $item => $value) {
-                $data = array(
-                    'nota' => $request->nota[$item],
-                    'nota_participation' => $request->nota_participation[$item],
-                    'nota_final' => $request->nota[$item] + $request->nota_participation[$item],
-                    'falta' => $request->falta[$item],
-                    'faltas_compensadas' => $request->faltas_compensadas[$item],
-                    'total_de_faltas' => $request->falta[$item] - $request->faltas_compensadas[$item],
-                );
-                $save = NotaTerceiroBimestre::where('id', $request->id[$item])->first();
-                $update = $save->update($data);
+        foreach ($this->request->id as $item => $value) {
+            $dataUpdate = [
+                'nota' => $request->nota[$item],
+                'falta' => $request->falta[$item],
+                'faltas_compensadas' => $request->faltas_compensadas[$item],
+                'total_de_faltas' => $request->falta[$item] - $request->faltas_compensadas[$item],
+            ];
+            $updateBimestre = NotaTerceiroBimestre::where('id', $request->id[$item])->update($dataUpdate);
+            if ($updateBimestre) {
+
+                DB::table('notas_quinto_conceitos')->where('ano', $request->ano[$item])->where('stage',
+                    $request->stage[$item])
+                    ->where('serie', $request->serie[$item])->where('teacher', $request->teacher[$item])
+                    ->where('discipline', $request->discipline[$item])->where('room', $request->room[$item])
+                    ->where('number', $request->number[$item])->where('name',
+                        $request->name[$item])->update(
+                        [
+                            'nota_terceiro_bimestre' => $request->nota[$item],
+                            'faltas_terceiro_bimestre' => $request->falta[$item] - $request->faltas_compensadas[$item],
+                        ]
+                    );
+
 
             }
+
         }
-        if ($update) {
-            Alert::success('Sucesso!', 'Registro atualizado com sucesso!');
+        if ($updateBimestre) {
+            Alert::success('Sucesso!', 'Registros criados com sucesso!');
             return redirect()->back();
         } else {
-            Alert::error('Erro!', 'Não foi possível atualizar o registro!');
+            Alert::error('Erro!', 'Não foi possível criar os registros!');
             return redirect()->back();
         }
 

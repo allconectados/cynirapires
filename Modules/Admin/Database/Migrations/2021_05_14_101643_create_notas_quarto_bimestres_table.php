@@ -15,6 +15,7 @@ class CreateNotasQuartoBimestresTable extends Migration
     {
         Schema::create('notas_quarto_bimestres', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('ano');
             $table->string('stage');
             $table->string('serie');
@@ -24,8 +25,6 @@ class CreateNotasQuartoBimestresTable extends Migration
             $table->string('number');
             $table->string('name');
             $table->string('nota')->nullable();
-            $table->string('nota_participation')->nullable();
-            $table->string('nota_final')->nullable();
             $table->string('falta')->nullable();
             $table->string('faltas_compensadas')->nullable();
             $table->string('total_de_faltas')->nullable();

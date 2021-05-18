@@ -115,47 +115,65 @@
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_primeiro_bimestre >= 5)
-                                        <span class="table-target text-success">{{$student->nota_primeiro_bimestre }}</span>
+                                        <span
+                                            class="table-target text-success">{{$student->nota_primeiro_bimestre }}</span>
                                     @elseif($student->nota_primeiro_bimestre < 5)
-                                        <span class="table-target text-danger">{{$student->nota_primeiro_bimestre }}</span>
+                                        <span
+                                            class="table-target text-danger">{{$student->nota_primeiro_bimestre }}</span>
                                     @endif
                                 </td>
 
                                 <td class="text-truncate text-center">
-                                    <span class="table-target text-secondary">{{$student->faltas_primeiro_bimestre }}</span>
+                                    @if($student->faltas_primeiro_bimestre > 0)
+                                        <span
+                                            class="table-target text-secondary">{{$student->faltas_primeiro_bimestre }}
+                                        </span>
+                                    @else
+                                        <span
+                                            class="table-target text-secondary"></span>
+                                    @endif
                                 </td>
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_segundo_bimestre >= 5)
-                                        <span class="table-target text-success">{{$student->nota_segundo_bimestre }}</span>
+                                        <span
+                                            class="table-target text-success">{{$student->nota_segundo_bimestre }}</span>
                                     @elseif($student->nota_segundo_bimestre < 5)
-                                        <span class="table-target text-danger">{{$student->nota_segundo_bimestre }}</span>
+                                        <span
+                                            class="table-target text-danger">{{$student->nota_segundo_bimestre }}</span>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span class="table-target text-secondary">{{$student->faltas_segundo_bimestre }}</span>
+                                    <span
+                                        class="table-target text-secondary">{{$student->faltas_segundo_bimestre }}</span>
                                 </td>
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_terceiro_bimestre >= 5)
-                                        <span class="table-target text-success">{{$student->nota_terceiro_bimestre }}</span>
+                                        <span
+                                            class="table-target text-success">{{$student->nota_terceiro_bimestre }}</span>
                                     @elseif($student->nota_terceiro_bimestre < 5)
-                                        <span class="table-target text-danger">{{$student->nota_terceiro_bimestre }}</span>
+                                        <span
+                                            class="table-target text-danger">{{$student->nota_terceiro_bimestre }}</span>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span class="table-target text-secondary">{{$student->faltas_terceiro_bimestre }}</span>
+                                    <span
+                                        class="table-target text-secondary">{{$student->faltas_terceiro_bimestre }}</span>
                                 </td>
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_quarto_bimestre >= 5)
-                                        <span class="table-target text-success">{{$student->nota_quarto_bimestre }}</span>
+                                        <span
+                                            class="table-target text-success">{{$student->nota_quarto_bimestre }}</span>
                                     @elseif($student->nota_quarto_bimestre < 5)
-                                        <span class="table-target text-danger">{{$student->nota_quarto_bimestre }}</span>
+                                        <span
+                                            class="table-target text-danger">{{$student->nota_quarto_bimestre }}</span>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span class="table-target text-secondary">{{$student->faltas_quarto_bimestre }}</span>
+                                    <span
+                                        class="table-target text-secondary">{{$student->faltas_quarto_bimestre }}</span>
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
@@ -167,7 +185,8 @@
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 2.8rem"
-                                           name="nota_participation_quinto_conceito[]" class="table-target text-secondary"
+                                           name="nota_participation_quinto_conceito[]"
+                                           class="table-target text-secondary"
                                            value="{{old('nota_participation_quinto_conceito')}}" tabindex="2" step='0.5'
                                            min="0.5" max="10">
                                 </td>
@@ -179,7 +198,8 @@
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 2.8rem"
-                                           name="faltas_compensadas_quinto_conceito[]" class="table-target text-secondary"
+                                           name="faltas_compensadas_quinto_conceito[]"
+                                           class="table-target text-secondary"
                                            value="{{old('faltas_compensadas_quinto_conceito')}}" tabindex="3" step='1'
                                            min="1" max="10">
                                 </td>

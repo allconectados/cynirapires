@@ -53,13 +53,13 @@
             </div>
         </div>
     </div>
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">--}}
-{{--                @include('admin::students._forms.create')--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="container">--}}
+    {{--        <div class="row">--}}
+    {{--            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">--}}
+    {{--                @include('admin::students._forms.create')--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
     <div class="container">
         <form action="{{route('admins.students.destroyAll')}}" method="POST">
             @csrf
@@ -126,10 +126,14 @@
                                 <td class="text-truncate">{{$item->email}}</td>
                                 <td class="text-truncate">{{$item->status}}</td>
                                 <td class="text-truncate text-center">
-                                    @if($item->active == 1)
-                                        <i class="fas fa-thumbs-up text-success"></i>
+                                    @if($item->status == 'Ativo')
+                                        @if($item->active == 1)
+                                            <i class="fas fa-thumbs-up text-success"></i>
+                                        @else
+                                            <i class="fas fa-thumbs-down text-danger"></i>
+                                        @endif
                                     @else
-                                        <i class="fas fa-thumbs-down text-danger"></i>
+
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">

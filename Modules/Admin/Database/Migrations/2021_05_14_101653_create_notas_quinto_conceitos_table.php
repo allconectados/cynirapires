@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotasQuintoConceitoTable extends Migration
+class CreateNotasQuintoConceitosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateNotasQuintoConceitoTable extends Migration
      */
     public function up()
     {
-        Schema::create('notas_quinto_conceito', function (Blueprint $table) {
+        Schema::create('notas_quinto_conceitos', function (Blueprint $table) {
             $table->id();
-            $table->string('ano');
-            $table->string('stage');
-            $table->string('serie');
-            $table->string('teacher');
-            $table->string('discipline');
-            $table->string('room');
-            $table->string('number');
-            $table->string('name');
+            $table->string('code')->unique()->nullable();
+            $table->string('ano')->nullable();
+            $table->string('stage')->nullable();
+            $table->string('serie')->nullable();
+            $table->string('teacher')->nullable();
+            $table->string('discipline')->nullable();
+            $table->string('room')->nullable();
+            $table->string('number')->nullable();
+            $table->string('name')->nullable();
             $table->string('nota_primeiro_bimestre')->nullable();
             $table->string('faltas_primeiro_bimestre')->nullable();
             $table->string('nota_segundo_bimestre')->nullable();
@@ -31,18 +32,11 @@ class CreateNotasQuintoConceitoTable extends Migration
             $table->string('faltas_terceiro_bimestre')->nullable();
             $table->string('nota_quarto_bimestre')->nullable();
             $table->string('faltas_quarto_bimestre')->nullable();
-
             $table->string('nota_quinto_conceito')->nullable();
 
-            $table->string('nota_participation_quinto_conceito')->nullable();
+            $table->string('total_de_notas')->nullable();
 
-            $table->string('nota_final_quinto_conceito')->nullable();
-
-            $table->string('faltas_compensadas_quinto_conceito')->nullable();
-
-            $table->string('total_de_faltas_quinto_conceito')->nullable();
-
-            $table->string('motivo_nota_participation')->nullable();
+            $table->string('total_de_faltas')->nullable();
 
             $table->boolean('status')->default(0);
 
@@ -57,6 +51,6 @@ class CreateNotasQuintoConceitoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notas_quinto_conceito');
+        Schema::dropIfExists('notas_quinto_conceitos');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotaQuintoConceito extends Model
 {
-    protected $table = 'notas_quinto_conceito';
+    protected $table = 'notas_quinto_conceitos';
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -34,10 +34,8 @@ class NotaQuintoConceito extends Model
         'nota_quarto_bimestre',
         'faltas_quarto_bimestre',
         'nota_quinto_conceito',
-        'nota_participation_quinto_conceito',
-        'nota_final_quinto_conceito',
-        'faltas_compensadas_quinto_conceito',
-        'total_de_faltas_quinto_conceito',
-        'motivo_nota_participation',
+        'total_de_notas',
+        'total_de_faltas',
+        'status',
     ];
 }

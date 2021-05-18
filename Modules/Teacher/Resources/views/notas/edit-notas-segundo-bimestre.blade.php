@@ -60,8 +60,6 @@
                         <tr>
                             <th class="text-center" style="width: 4rem">Nº</th>
                             <th class="text-center" style="width: 4rem">Nota</th>
-                            <th class="text-center" style="width: 4rem">Nota P.</th>
-                            <th class="text-center" style="width: 4rem">Total N</th>
                             <th class="text-center" style="width: 4rem">Falta</th>
                             <th class="text-center" style="width: 4rem">Falta C.</th>
                             <th class="text-center" style="width: 4rem">Total F</th>
@@ -71,6 +69,7 @@
                         <tbody style="font-size: 90% !important;">
                         @foreach($studentsNote->sortBy('number') as $student)
                             <input type="hidden" name="id[]" value="{{$student->id}}">
+                            <input type="hidden" name="code[]" value="{{$student->code}}" readonly>
                             <div class="container-fluid" style="display: none">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
@@ -107,68 +106,49 @@
                                 <td class="text-truncate text-center" contenteditable="true">
                                     @if($student->nota >= 5)
                                         <input type="number" style="max-width: 4rem" name="nota[]"
-                                               class="table-target text-success"
-                                               value="{{$student->nota}}">
+                                               class="table-target text-success" tabindex="1" step='1' min="0" max="10"
+                                               value="{{$student->nota}}" required>
                                     @elseif($student->nota < 5)
                                         <input type="number" style="max-width: 4rem" name="nota[]"
-                                               class="table-target text-danger"
-                                               value="{{$student->nota }}">
-                                    @else
-                                        <input type="number" style="max-width: 4rem" name="nota[]"
-                                               class="table-target text-secondary" value=""
-                                               step='0.5' min="0.5" max="10">
+                                               class="table-target text-danger" tabindex="1" step='1' min="0" max="10"
+                                               value="{{$student->nota }}" required>
                                     @endif
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 4rem" name="nota_participation[]"
-                                           class="table-target text-secondary"
-                                           value="{{$student->nota_participation, old('nota_participation')}}"
-                                           tabindex="2" step='0.5' min="0.5" max="10">
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    @if($student->nota_final >= 5)
-                                        <input type="number" style="max-width: 4rem" name="nota_final[]"
-                                               class="table-target text-success"
-                                               value="{{$student->nota_final}}"
-                                               readonly>
-                                    @elseif($student->nota_final < 5)
-                                        <input type="number" style="max-width: 4rem" name="nota_final[]"
-                                               class="table-target text-danger"
-                                               value="{{$student->nota_final }}"
-                                               readonly>
+                                    @if($student->falta > 0)
+                                        <input type="number" style="max-width: 4rem" name="falta[]"
+                                               class="table-target text-secondary" tabindex="2" step='1' min="1" max="10000"
+                                               value="{{$student->falta, old('falta')}}">
                                     @else
-                                        <input type="number" style="max-width: 4rem" name="nota_final[]"
-                                               class="table-target text-secondary" value=""
-                                               step='0.5' min="0.5" max="10" readonly>
+                                        <input type="number" style="max-width: 4rem" name="falta[]"
+                                               class="table-target text-secondary" tabindex="2" step='1' min="1" max="10000"
+                                               value="{{old('falta')}}">
                                     @endif
-
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 4rem" name="falta[]"
-                                           class="table-target text-secondary"
-                                           value="{{$student->falta, old('falta')}}" tabindex="3" step='1'>
+                                    @if($student->falta > 0)
+                                        <input type="number" style="max-width: 4rem" name="faltas_compensadas[]"
+                                               class="table-target text-secondary" tabindex="3" step='1' min="1" max="10000"
+                                               value="{{$student->faltas_compensadas, old('faltas_compensadas')}}">
+                                    @else
+                                        <input type="number" style="max-width: 4rem" name="faltas_compensadas[]"
+                                               class="table-target text-secondary" tabindex="3" step='1' min="1" max="10000"
+                                               value="{{old('faltas_compensadas')}}">
+                                    @endif
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 4rem" name="faltas_compensadas[]"
-                                           class="table-target text-secondary"
-                                           value="{{$student->faltas_compensadas, old('faltas_compensadas')}}"
-                                           tabindex="4" step='1'>
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    @if($student->falta != null)
+                                    @if($student->total_de_faltas > 0)
                                         <input type="number" style="max-width: 4rem" name="total_de_faltas[]"
                                                class="table-target text-secondary"
-                                               value="{{$student->falta - $student->faltas_compensadas}}"
+                                               value="{{$student->total_de_faltas }}"
                                                readonly>
                                     @else
-                                        <input type="text" style="max-width: 4rem" name="total_de_faltas[]"
+                                        <input type="number" style="max-width: 4rem" name="total_de_faltas[]"
                                                class="table-target text-secondary"
-                                               value=""
+                                               value="{{old('total_de_faltas') }}"
                                                readonly>
                                     @endif
                                 </td>

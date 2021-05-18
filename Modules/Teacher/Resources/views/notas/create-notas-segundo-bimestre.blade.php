@@ -56,8 +56,6 @@
                         <tr>
                             <th class="text-center" style="width: 4rem">Nº</th>
                             <th class="text-center" style="width: 4rem">Nota</th>
-                            <th class="text-center" style="width: 4rem">Nota P.</th>
-                            <th class="text-center" style="width: 4rem">Total N</th>
                             <th class="text-center" style="width: 4rem">Falta</th>
                             <th class="text-center" style="width: 4rem">Falta C.</th>
                             <th class="text-center" style="width: 4rem">Total F</th>
@@ -67,6 +65,8 @@
                         </thead>
                         <tbody style="font-size: 90% !important;">
                         @foreach($students->sortBy('number') as $student)
+                            <input type="hidden" name="code[]" class="form-control form-control-sm"
+                                   value="{{ uniqid()}}" readonly>
                             <div class="container-fluid" style="display: none">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
@@ -103,27 +103,17 @@
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 4rem" name="nota[]" class="table-target text-secondary"
-                                           value="{{old('nota')}}" tabindex="1" step='0.5' min="0" max="10" required>
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 4rem" name="nota_participation[]" class="table-target text-secondary"
-                                           value="{{old('nota_participation')}}" tabindex="2" step='0.5' min="0.5" max="10">
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 4rem" name="nota_final[]" class="table-target text-secondary"
-                                           value="{{old('nota_final')}}" step='0.5' min="0.5" max="10" readonly>
+                                           value="{{'8',old('nota')}}" tabindex="1" step='1' min="0" max="10" required>
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 4rem" name="falta[]" class="table-target text-secondary"
-                                           value="{{old('falta')}}" tabindex="3"  step='1' min="0" max="500" required>
+                                           value="{{'8',old('falta')}}" tabindex="3"  step='1' min="0" max="1000">
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="number" style="max-width: 4rem" name="faltas_compensadas[]" class="table-target text-secondary"
-                                           value="{{old('faltas_compensadas')}}" tabindex="4"  step='1' min="0" max="500">
+                                           value="{{'7',old('faltas_compensadas')}}" tabindex="4"  step='1' min="1" max="1000">
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">

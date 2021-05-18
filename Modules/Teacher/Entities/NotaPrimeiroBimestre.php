@@ -17,6 +17,7 @@ class NotaPrimeiroBimestre extends Model
     ];
 
     protected $fillable = [
+        'code',
         'ano',
         'stage',
         'serie',
@@ -26,8 +27,6 @@ class NotaPrimeiroBimestre extends Model
         'number',
         'name',
         'nota',
-        'nota_participation',
-        'nota_final',
         'falta',
         'faltas_compensadas',
         'total_de_faltas',

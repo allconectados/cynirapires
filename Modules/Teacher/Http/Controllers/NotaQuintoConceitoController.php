@@ -78,7 +78,7 @@ class NotaQuintoConceitoController extends Controller
 
         $discipline = $this->url->urlData($this->discipline, $discipline);
 
-        $studentsNote = DB::table('notas_quinto_conceito')
+        $studentsNote = DB::table('notas_quinto_conceitos')
             ->where('ano', '=', $year->title)
             ->where('stage', '=', $stage->title)
             ->where('serie', '=', $serie->title)
@@ -87,11 +87,9 @@ class NotaQuintoConceitoController extends Controller
             ->where('room', '=', $room->title)
             ->get();
 
-        $titlePage = 'NOTAS DO 5º BIMESTRE: '.$discipline->title.' / '.$room->title;
-
         if ($studentsNote->isNotEmpty()) {
             $titlePage = 'NOTAS DO 5º BIMESTRE: '.$discipline->title.' / '.$room->title;
-            $studentsNote = DB::table('notas_quinto_conceito')
+            $studentsNote = DB::table('notas_quinto_conceitos')
                 ->where('ano', '=', $year->title)
                 ->where('stage', '=', $stage->title)
                 ->where('serie', '=', $serie->title)
@@ -102,7 +100,7 @@ class NotaQuintoConceitoController extends Controller
             return view('teacher::notas.edit-notas-quinto-conceito',
                 compact('titlePage', 'year', 'stage', 'serie', 'room', 'discipline', 'studentsNote'));
         } else {
-            $titlePage = 'NOTAS DO 5º BIMESTRE: '.$discipline->title.' / '.$room->title;
+            $titlePage = 'NOTAS DO 5º CONCEITO: '.$discipline->title.' / '.$room->title;
             $students = DB::table('students')
                 ->where('status', '=', 'Ativo')
                 ->where('room', '=', $room->title)
@@ -150,7 +148,7 @@ class NotaQuintoConceitoController extends Controller
                     'faltas_compensadas' => $faltas_compensadas[$i],
                     'total_de_faltas' => $total_de_faltas[$i],
                 ];
-                DB::table('notas_quinto_conceito')->insert($datasave);
+                DB::table('notas_quinto_conceitos')->insert($datasave);
             }
             return redirect()->back();
 
