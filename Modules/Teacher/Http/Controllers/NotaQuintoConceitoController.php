@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Teacher\Entities\Discipline;
+use Modules\Teacher\Entities\NotaQuintoConceito;
 use Modules\Teacher\Entities\Room;
 use Modules\Teacher\Entities\Serie;
 use Modules\Teacher\Entities\Stage;
 use Modules\Teacher\Entities\Year;
 use Modules\Teacher\Services\GetUrl;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NotaQuintoConceitoController extends Controller
 {
@@ -113,104 +115,45 @@ class NotaQuintoConceitoController extends Controller
     }
 
 
-        public
-        function store()
-        {
-            $ano = $this->request->ano;
-            $stage = $this->request->stage;
-            $serie = $this->request->serie;
-            $teacher = $this->request->teacher;
-            $discipline = $this->request->discipline;
-            $room = $this->request->room;
-            $number = $this->request->number;
-            $name = $this->request->name;
-            $nota = $this->request->nota;
-            $nota_participation = $this->request->nota_participation;
-            $nota_final = $this->request->nota_final;
-            $falta = $this->request->falta;
-            $faltas_compensadas = $this->request->faltas_compensadas;
-            $total_de_faltas = $this->request->total_de_faltas;
+    public function update(Request $request, $id)
+    {
+        $student = NotaQuintoConceito::find($id);
 
-            for ($i = 0; $i < count($ano); $i++) {
-                $datasave = [
-                    'ano' => $ano[$i],
-                    'stage' => $stage[$i],
-                    'serie' => $serie[$i],
-                    'teacher' => $teacher[$i],
-                    'discipline' => $discipline[$i],
-                    'room' => $room[$i],
-                    'number' => $number[$i],
-                    'name' => $name[$i],
-                    'nota' => $nota[$i],
-                    'nota_participation' => $nota_participation[$i],
-                    'nota_final' => $nota_final[$i],
-                    'falta' => $falta[$i],
-                    'faltas_compensadas' => $faltas_compensadas[$i],
-                    'total_de_faltas' => $total_de_faltas[$i],
-                ];
-                DB::table('notas_quinto_conceitos')->insert($datasave);
-            }
-            return redirect()->back();
+        $student->nota_primeiro_bimestre = $this->request->nota_primeiro_bimestre;
+        $student->nota_segundo_bimestre = $this->request->nota_segundo_bimestre;
+        $student->nota_terceiro_bimestre = $this->request->nota_terceiro_bimestre;
+        $student->nota_quarto_bimestre = $this->request->nota_quarto_bimestre;
+
+        $student->faltas_primeiro_bimestre = $this->request->faltas_primeiro_bimestre;
+        $student->faltas_segundo_bimestre = $this->request->faltas_segundo_bimestre;
+        $student->faltas_terceiro_bimestre = $this->request->faltas_terceiro_bimestre;
+        $student->faltas_quarto_bimestre = $this->request->faltas_quarto_bimestre;
+
+        $student->nota_quinto_conceito = $this->request->nota_quinto_conceito;
+        $student->total_de_notas = $this->request->total_de_notas;
+        $student->total_de_faltas = $this->request->total_de_faltas;
+
+        foreach ($this->request->id as $item => $value) {
+            $dataUpdate = [
+                'nota_quinto_conceito' => $request->nota_quinto_conceito[$item],
+                'total_de_notas' => $request->nota_quinto_conceito[$item],
+                'total_de_faltas' => $request->faltas_primeiro_bimestre[$item]
+                    + $request->faltas_segundo_bimestre[$item] + $request->faltas_terceiro_bimestre[$item]
+                    + $request->faltas_quarto_bimestre[$item],
+            ];
+
+//            dd($dataUpdate);
+            $updateQuintoConceito = NotaQuintoConceito::where('id', $request->id[$item])->update($dataUpdate);
 
         }
-
-        public
-        function update($id)
-        {
-            $discipline = DB::table('disciplines')->find($id);
-
-            dd($discipline);
-
-            $ano = $discipline->ano;
-            $stage = $discipline->stage;
-            $serie = $discipline->serie;
-            $teacher = $discipline->teacher;
-            $discipline = $discipline->discipline;
-            $room = $discipline->room;
-            $number = $discipline->number;
-            $name = $discipline->name;
-            $bimestre_one_note = $discipline->bimestre_one_note;
-            $bimestre_one_falta = $discipline->bimestre_one_falta;
-            $bimestre_two_note = $discipline->bimestre_two_note;
-            $bimestre_two_falta = $discipline->bimestre_two_falta;
-            $bimestre_tree_note = $discipline->bimestre_tree_note;
-            $bimestre_tree_falta = $discipline->bimestre_tree_falta;
-            $bimestre_four_note = $discipline->bimestre_four_note;
-            $bimestre_four_falta = $discipline->bimestre_four_falta;
-            $note_participation = $discipline->note_participation;
-            $total_note = $discipline->total_note;
-            $faltas_compensadas = $discipline->faltas_compensadas;
-            $total_faltas = $discipline->total_faltas;
-            $motivo_note_participation = $discipline->motivo_note_participation;
-
-            for ($i = 0; $i < count($ano); $i++) {
-                $datasave = [
-                    'ano' => $ano[$i],
-                    'stage' => $stage[$i],
-                    'serie' => $serie[$i],
-                    'teacher' => $teacher[$i],
-                    'discipline' => $discipline[$i],
-                    'room' => $room[$i],
-                    'number' => $number[$i],
-                    'name' => $name[$i],
-                    'bimestre_one_note' => $bimestre_one_note[$i],
-                    'bimestre_one_falta' => $bimestre_one_falta[$i],
-                    'bimestre_two_note' => $bimestre_two_note[$i],
-                    'bimestre_two_falta' => $bimestre_two_falta[$i],
-                    'bimestre_tree_note' => $bimestre_tree_note[$i],
-                    'bimestre_tree_falta' => $bimestre_tree_falta[$i],
-                    'bimestre_four_note' => $bimestre_four_note[$i],
-                    'bimestre_four_falta' => $bimestre_four_falta[$i],
-                    'note_participation' => $note_participation[$i],
-                    'total_note' => $total_note[$i],
-                    'faltas_compensadas' => $faltas_compensadas[$i],
-                    'total_faltas' => $total_faltas[$i],
-                    'motivo_note_participation' => $motivo_note_participation[$i],
-                ];
-                DB::table('notas_bimestre_regular')->update($datasave);
-            }
+        if ($updateQuintoConceito) {
+            Alert::success('Sucesso!', 'Registros criados com sucesso!');
             return redirect()->back();
-
+        } else {
+            Alert::error('Erro!', 'Não foi possível criar os registros!');
+            return redirect()->back();
         }
 
     }
+
+}

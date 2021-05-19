@@ -68,17 +68,15 @@
                             <th class="text-center" style="width: 2.8rem">4ºB</th>
                             <th class="text-center" style="width: 2.8rem">Faltas</th>
                             <th class="text-center" style="width: 2.8rem">5ºB</th>
-                            <th class="text-center" style="width: 2.8rem">Nota P.</th>
                             <th class="text-center" style="width: 2.8rem">Nota</th>
-                            <th class="text-center" style="width: 2.8rem">F. C.</th>
                             <th class="text-center" style="width: 2.8rem">Falta</th>
-                            <th scope="col">Motivo da Nota. de P.</th>
                             <th scope="col">Nome</th>
 
                         </tr>
                         </thead>
                         <tbody style="font-size: 90% !important;">
                         @foreach($studentsNote->sortBy('number') as $student)
+                            <input type="hidden" name="id[]" value="{{$student->id}}">
                             <div class="container-fluid" style="display: none">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
@@ -115,112 +113,117 @@
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_primeiro_bimestre >= 5)
-                                        <span
-                                            class="table-target text-success">{{$student->nota_primeiro_bimestre }}</span>
+                                        <input name="nota_primeiro_bimestre[]" type="text"
+                                               class="table-target text-success" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_primeiro_bimestre }}" readonly>
+
                                     @elseif($student->nota_primeiro_bimestre < 5)
-                                        <span
-                                            class="table-target text-danger">{{$student->nota_primeiro_bimestre }}</span>
+                                        <input name="nota_primeiro_bimestre[]" type="text"
+                                               class="table-target text-danger" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_primeiro_bimestre }}" readonly>
                                     @endif
+                                </td>
+                                <td class="text-truncate text-center">
+                                    <input name="faltas_primeiro_bimestre[]" type="text"
+                                           class="table-target text-secondary"
+                                           value="{{$student->faltas_primeiro_bimestre }}" readonly>
                                 </td>
 
-                                <td class="text-truncate text-center">
-                                    @if($student->faltas_primeiro_bimestre > 0)
-                                        <span
-                                            class="table-target text-secondary">{{$student->faltas_primeiro_bimestre }}
-                                        </span>
-                                    @else
-                                        <span
-                                            class="table-target text-secondary"></span>
-                                    @endif
-                                </td>
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_segundo_bimestre >= 5)
-                                        <span
-                                            class="table-target text-success">{{$student->nota_segundo_bimestre }}</span>
+                                        <input name="nota_segundo_bimestre[]" type="text"
+                                               class="table-target text-success" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_segundo_bimestre }}" readonly>
+
                                     @elseif($student->nota_segundo_bimestre < 5)
-                                        <span
-                                            class="table-target text-danger">{{$student->nota_segundo_bimestre }}</span>
+                                        <input name="nota_segundo_bimestre[]" type="text"
+                                               class="table-target text-danger" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_segundo_bimestre }}" readonly>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span
-                                        class="table-target text-secondary">{{$student->faltas_segundo_bimestre }}</span>
+                                    <input name="faltas_segundo_bimestre[]" type="text"
+                                           class="table-target text-secondary"
+                                           value="{{$student->faltas_segundo_bimestre }}" readonly>
                                 </td>
+
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_terceiro_bimestre >= 5)
-                                        <span
-                                            class="table-target text-success">{{$student->nota_terceiro_bimestre }}</span>
+                                        <input name="nota_terceiro_bimestre[]" type="text"
+                                               class="table-target text-success" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_terceiro_bimestre }}" readonly>
+
                                     @elseif($student->nota_terceiro_bimestre < 5)
-                                        <span
-                                            class="table-target text-danger">{{$student->nota_terceiro_bimestre }}</span>
+                                        <input name="nota_terceiro_bimestre[]" type="text"
+                                               class="table-target text-danger" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_terceiro_bimestre }}" readonly>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span
-                                        class="table-target text-secondary">{{$student->faltas_terceiro_bimestre }}</span>
+                                    <input name="faltas_terceiro_bimestre[]" type="text"
+                                           class="table-target text-secondary"
+                                           value="{{$student->faltas_terceiro_bimestre }}" readonly>
                                 </td>
 
                                 <td class="text-truncate text-center">
                                     @if($student->nota_quarto_bimestre >= 5)
-                                        <span
-                                            class="table-target text-success">{{$student->nota_quarto_bimestre }}</span>
+                                        <input name="nota_quarto_bimestre[]" type="text"
+                                               class="table-target text-success" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_quarto_bimestre }}" readonly>
+
                                     @elseif($student->nota_quarto_bimestre < 5)
-                                        <span
-                                            class="table-target text-danger">{{$student->nota_quarto_bimestre }}</span>
+                                        <input name="nota_quarto_bimestre[]" type="text"
+                                               class="table-target text-danger" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_quarto_bimestre }}" readonly>
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <span
-                                        class="table-target text-secondary">{{$student->faltas_quarto_bimestre }}</span>
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 2.8rem" name="nota_quinto_conceito[]"
+                                    <input name="faltas_quarto_bimestre[]" type="text"
                                            class="table-target text-secondary"
-                                           value="{{old('nota_quinto_conceito')}}" tabindex="1" step='0.5' min="0"
-                                           max="10">
+                                           value="{{$student->faltas_quarto_bimestre }}" readonly>
                                 </td>
 
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 2.8rem"
-                                           name="nota_participation_quinto_conceito[]"
-                                           class="table-target text-secondary"
-                                           value="{{old('nota_participation_quinto_conceito')}}" tabindex="2" step='0.5'
-                                           min="0.5" max="10">
-                                </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="text" style="max-width: 2.8rem" name="nota_final_quinto_conceito[]"
-                                           value="{{old('nota_final_quinto_conceito')}}" readonly>
+                                    @if($student->nota_quinto_conceito >= 5)
+                                        <input type="text" name="nota_quinto_conceito[]"
+                                               class="table-target text-success" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_quinto_conceito }}"  tabindex="1" step='1' min="0"
+                                               max="10">
+
+                                    @elseif($student->nota_quinto_conceito < 5)
+                                        <input type="text" name="nota_quinto_conceito[]"
+                                               class="table-target text-danger" style="background-color: #EEEEEE"
+                                               value="{{$student->nota_quinto_conceito }}" tabindex="1" step='1' min="0"
+                                               max="10">
+                                        @else
+                                        <input type="number" style="max-width: 2.8rem" name="nota_quinto_conceito[]"
+                                               class="table-target text-secondary"
+                                               value="{{$student->nota_quinto_conceito,old('nota_quinto_conceito')}}" tabindex="1" step='1' min="0"
+                                               max="10">
+                                    @endif
+
                                 </td>
 
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <input type="number" style="max-width: 2.8rem"
-                                           name="faltas_compensadas_quinto_conceito[]"
-                                           class="table-target text-secondary"
-                                           value="{{old('faltas_compensadas_quinto_conceito')}}" tabindex="3" step='1'
-                                           min="1" max="10">
+                                <td class="text-truncate text-center">
+                                    @if($student->total_de_notas >= 5)
+                                        <input name="total_de_notas[]" type="text"
+                                               class="table-target text-success"
+                                               value="{{$student->total_de_notas }}" readonly>
+
+                                    @elseif($student->total_de_notas < 5)
+                                        <input name="total_de_notas[]" type="text"
+                                               class="table-target text-danger"
+                                               value="{{$student->total_de_notas }}" readonly>
+                                    @endif
                                 </td>
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="text" style="max-width: 2.8rem"
-                                           name="total_de_faltas_quinto_conceito[]"
-                                           value="{{old('total_de_faltas_quinto_conceito')}}" readonly>
-                                </td>
-
-                                <td class="text-truncate text-center" contenteditable="true">
-                                    <select name="motivo_nota_participation[]" style="max-width: 12rem"
-                                            class="form-control form-control-sm">
-                                        <option value="{{old('motivo_nota_participation')}}">
-                                            {{'Selecione', old('motivo_nota_participation')}}
-                                        </option>
-                                        <option value="Participação">Participação</option>
-                                        <option value="Bondade">Bondade</option>
-                                        <option value="Amor">Amor</option>
-                                        <option value="Reconhecimento">Reconhecimento</option>
-                                    </select>
+                                           name="total_de_faltas[]"class="table-target text-secondary"
+                                           value="{{$student->total_de_faltas}}" readonly>
                                 </td>
 
                                 <td class="text-truncate">

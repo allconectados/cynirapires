@@ -69,7 +69,6 @@
                         <tbody style="font-size: 90% !important;">
                         @foreach($studentsNote->sortBy('number') as $student)
                             <input type="hidden" name="id[]" value="{{$student->id}}">
-                            <input type="hidden" name="code[]" value="{{$student->code}}" readonly>
                             <div class="container-fluid" style="display: none">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
