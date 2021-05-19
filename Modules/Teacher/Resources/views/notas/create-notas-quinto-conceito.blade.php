@@ -196,6 +196,7 @@
         </div>
         <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
     </form>
+
 @endsection
 @push('scripts')
     <script type="text/javascript">

@@ -20,17 +20,6 @@
             </div>
         </div>
     </div>
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">--}}
-{{--                <a href="{{route('coordinations.conselho')}}" class="btn btn-primary btn-sm btn-block">--}}
-{{--                    Conselho--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">--}}
 
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 @endsection

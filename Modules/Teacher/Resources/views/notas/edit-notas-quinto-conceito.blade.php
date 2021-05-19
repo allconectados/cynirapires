@@ -1,7 +1,7 @@
 @extends('teacher::layouts.master')
 
 @section('content')
-    <h1>EDITAR</h1>
+    <h1>EDITAR Quinto</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
@@ -187,22 +187,24 @@
 
 
                                 <td class="text-truncate text-center" contenteditable="true">
-                                    @if($student->nota_quinto_conceito >= 5)
+                                    @if($student->nota_quinto_conceito == null)
+                                        <input type="number" style="max-width: 2.8rem" name="nota_quinto_conceito[]"
+                                               class="table-target text-secondary"
+                                               value="{{$student->nota_quinto_conceito,old('nota_quinto_conceito')}}"
+                                               tabindex="1" step='1' min="0"
+                                               max="10" required>
+
+                                    @elseif($student->nota_quinto_conceito >= 5)
                                         <input type="text" name="nota_quinto_conceito[]"
                                                class="table-target text-success" style="background-color: #EEEEEE"
-                                               value="{{$student->nota_quinto_conceito }}"  tabindex="1" step='1' min="0"
+                                               value="{{$student->nota_quinto_conceito }}" tabindex="1" step='1' min="0"
                                                max="10">
-
                                     @elseif($student->nota_quinto_conceito < 5)
                                         <input type="text" name="nota_quinto_conceito[]"
                                                class="table-target text-danger" style="background-color: #EEEEEE"
                                                value="{{$student->nota_quinto_conceito }}" tabindex="1" step='1' min="0"
                                                max="10">
-                                        @else
-                                        <input type="number" style="max-width: 2.8rem" name="nota_quinto_conceito[]"
-                                               class="table-target text-secondary"
-                                               value="{{$student->nota_quinto_conceito,old('nota_quinto_conceito')}}" tabindex="1" step='1' min="0"
-                                               max="10">
+
                                     @endif
 
                                 </td>
@@ -222,7 +224,7 @@
 
                                 <td class="text-truncate text-center" contenteditable="true">
                                     <input type="text" style="max-width: 2.8rem"
-                                           name="total_de_faltas[]"class="table-target text-secondary"
+                                           name="total_de_faltas[]" class="table-target text-secondary"
                                            value="{{$student->total_de_faltas}}" readonly>
                                 </td>
 

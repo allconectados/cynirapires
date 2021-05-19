@@ -12,7 +12,8 @@
             </div>
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <a class="btn btn-secondary btn-sm btn-block" href="{{route('coordinations.series.index', [$year->url, $stage->url])}}">
+                    <a class="btn btn-secondary btn-sm btn-block"
+                       href="{{route('coordinations.series.index', [$year->url, $stage->url])}}">
                         Voltar
                     </a>
                 </div>
@@ -49,7 +50,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom p-3">
+                            <div class="form-group">
+                                <a href="{{route('coordinations.notas.conselho', [$year->url,$stage->url,$serie->url,$room->url])}}"
+                                   class="btn btn-info btn-sm btn-block">
+                                    Conselho
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             @empty
 
             @endforelse
