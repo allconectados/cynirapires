@@ -25,17 +25,7 @@ class NotaQuintoConceito extends Model
         'room',
         'number',
         'name',
-        'nota_primeiro_bimestre',
-        'faltas_primeiro_bimestre',
-        'nota_segundo_bimestre',
-        'faltas_segundo_bimestre',
-        'nota_terceiro_bimestre',
-        'faltas_terceiro_bimestre',
-        'nota_quarto_bimestre',
-        'faltas_quarto_bimestre',
         'nota_quinto_conceito',
-        'total_de_notas',
-        'total_de_faltas',
         'status',
     ];
 }

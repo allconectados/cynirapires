@@ -13,4 +13,15 @@ interface EditInterface
      */
     public function editData(Model $model, $id);
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function editDataTeacher($id);
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function editDataStudent($id);
 }

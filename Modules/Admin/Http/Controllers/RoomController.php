@@ -10,6 +10,8 @@ use Modules\Admin\Entities\Discipline;
 use Modules\Admin\Entities\Room;
 use Modules\Admin\Entities\Serie;
 use Modules\Admin\Entities\Stage;
+use Modules\Admin\Entities\Subject;
+use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Entities\Year;
 use Modules\Admin\Http\Requests\RoomStoreFormRequest;
 use Modules\Admin\Http\Requests\RoomUpdateFormRequest;
@@ -174,7 +176,7 @@ class RoomController extends Controller
 
     public function edit($year, $stage, $serie, $id)
     {
-        $titlePage = 'Editar Turmas';
+        $titlePage = 'Editar Turmas AQUI';
 
         $year = $this->url->urlData($this->year, $year);
 
@@ -184,18 +186,17 @@ class RoomController extends Controller
 
         $room = $this->edit->editData($this->model, $id);
 
-        $disciplines = Discipline::select('year_id','stage_id','serie_id','id','title', 'teacher', 'room_id')
+        $disciplines = Discipline::select('id','title', 'teacher', 'room_id')
             ->where('year_id', '=', $year->id)
             ->where('stage_id', '=', $stage->id)
             ->where('serie_id', '=', $serie->id)
             ->where('room_id', '=', $room->id)
             ->get();
 
-        $teachers = DB::table('teachers')->select('name')
-            ->orderBy('name', 'asc')->get();
+        $teachers = DB::table('teachers')->select('name')->orderBy('name', 'asc')->get();
 
         return view('admin::rooms.edit',
-            compact('titlePage','year', 'stage', 'serie', 'room', 'disciplines', 'teachers'
+            compact('titlePage','year', 'stage', 'serie', 'room', 'disciplines','teachers'
             ));
     }
 

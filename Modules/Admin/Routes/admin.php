@@ -64,9 +64,23 @@ Route::prefix('painel/admin/teachers')->middleware(['auth'])->group(function () 
     Route::get('/', 'TeacherController@index')->name('admins.teachers.index');
     Route::post('/import', 'TeacherController@import')->name('admins.teachers.import');
     Route::post('/store', 'TeacherController@store')->name('admins.teachers.store');
-    Route::get('/{id}/edit', 'TeacherController@edit')->name('admins.teachers.edit');
-    Route::put('/update/disciplines/{id}', 'TeacherController@update')->name('admins.teachers.update');
     Route::get('/{id}/{discipline}/edit', 'TeacherController@discipline')->name('admins.teachers.discipline');
     Route::put('/update/rooms/{id}', 'TeacherController@updateRoom')->name('admins.teachers.updateRoom');
     Route::delete('/destroy/{id}', 'TeacherController@destroy')->name('admins.teachers.destroy');
 });
+
+
+//ROTAS DE STUDENTS /////////////////////////////////////////////////////////////////////////////////////////////////
+Route::prefix('painel/admin')->middleware(['auth'])->group(function () {
+    Route::get('/students', 'StudentController@index')->name('admins.students.index');
+    Route::get('/students/{id}/edit', 'StudentController@edit')->name('admins.students.edit');
+    Route::post('/students/import', 'StudentController@import')->name('admins.students.import');
+    Route::post('/students/store', 'StudentController@store')->name('admins.students.store');
+    Route::put('/students/update/{id}', 'StudentController@update')->name('admins.students.update');
+    Route::delete('/students/destroy/{id}', 'StudentController@destroy')->name('admins.students.destroy');
+    Route::post('/destroy-students/', 'StudentController@destroyAll')->name('admins.students.destroyAll');
+    Route::get('/room/{roomStudent}', 'StudentController@filterDataStudent')->name('filterStudent');
+    Route::any('/students/form', 'StudentController@filterDataForm')->name('filterDataForm');
+});
+//ROTAS DE STUDENTS /////////////////////////////////////////////////////////////////////////////////////////////////
+

@@ -71,6 +71,11 @@ class FlashMessage
         return Alert::warning('Atenção!', 'Por favor, selecione um registro!');
     }
 
+    public function selectCheckboxCreateTableConselhos()
+    {
+        return Alert::warning('Atenção!', 'Por favor, selecione o checkbox!');
+    }
+
     public function studentRemanejadoSuccess()
     {
         return toast('Aluno remanejado com sucesso!', 'success')->timerProgressBar();

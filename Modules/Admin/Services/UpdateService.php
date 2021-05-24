@@ -16,6 +16,7 @@ use Modules\Admin\Entities\Proatec;
 use Modules\Admin\Entities\Room;
 use Modules\Admin\Entities\Secretary;
 use Modules\Admin\Entities\Student;
+use Modules\Admin\Entities\Subject;
 use Modules\Admin\Entities\Teacher;
 use Modules\Admin\Interfaces\UpdateInterface;
 
@@ -290,7 +291,35 @@ class UpdateService implements UpdateInterface
     {
         $dataForm = $this->request->all();
 
+//        dd($dataForm);
+
         $data = Discipline::find($id);
+
+        //Altera os dados de registro no banco
+        $update = $data->update($dataForm);
+
+        if ($update) {
+            $this->message->updateMessageSuccess();
+            return redirect()->back();
+        } else {
+            $this->message->updateMessageError();
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * @param  FormRequest  $classFormRequest
+     * @param $id
+     * @return mixed
+     */
+    public function updateDataSubject(FormRequest $classFormRequest, $id)
+    {
+        $dataForm = $this->request->all();
+
+        $data = Subject::find($id);
+
+        // Atualizar disciplines
+        $data->teachers()->sync($this->request->get('teachers'));
 
         //Altera os dados de registro no banco
         $update = $data->update($dataForm);

@@ -22,10 +22,10 @@
                         {{--                        @if ($room->id === $discipline->room_id)--}}
                         <tr>
                             <td>{{$discipline->title}}</td>
-                            @if ($discipline->teacher_id != null)
-                                <td>{{$discipline->teacher->name}}</td>
+                            @if ($discipline->teacher != null)
+                                <td>{{$discipline->teacher}}</td>
                                 <td class="text-center">
-                                    {{\Carbon\Carbon::parse($discipline->teacher->date_initial)->format('d/m')}}
+                                    {{\Carbon\Carbon::parse($discipline->date_initial)->format('d/m')}}
                                 </td>
                             @else
                                 <td>Não Informado!</td>

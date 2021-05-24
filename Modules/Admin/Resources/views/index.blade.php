@@ -100,3 +100,7 @@
         </div>
     </div>
 @endsection
+{{--pegar usuário com javascript--}}
+{{--<script>--}}
+{{--    console.log("<?= Auth::user()->name ?>");--}}
+{{--</script>--}}

@@ -1,11 +1,11 @@
-@extends('admin::layouts.master')
+@extends('coordination::layouts.master')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <a class="btn btn-primary btn-sm btn-block" href="{{route('admins.admins.index')}}">
+                    <a class="btn btn-primary btn-sm btn-block" href="{{route('coordinations.coordinations.index')}}">
                         Painel
                     </a>
                 </div>
@@ -13,7 +13,7 @@
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
                     <a class="btn btn-secondary btn-sm btn-block"
-                       href="{{route('admins.rooms.index', [$year->url, $stage->url, $serie->url])}}">
+                       href="{{route('coordinations.rooms.index', [$year->url, $stage->url, $serie->url])}}">
                         Voltar
                     </a>
                 </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="container">
-        <form action="{{route('admins.students.destroyAll')}}" method="POST">
+        <form action="{{route('coordinations.students.destroyAll')}}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-1 col-xl-1">
@@ -78,7 +78,7 @@
                                     @endif
                                 </td>
                                 <td class="text-truncate text-center">
-                                    <a href="{{route('admins.students.edit', $item->id)}}"
+                                    <a href="{{route('coordinations.students.edit', $item->id)}}"
                                        class="btn btn-sm btn-block btn-warning">
                                         <span style="cursor: pointer;"><i class="fas fa-user-edit"></i></span>
                                     </a>

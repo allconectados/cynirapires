@@ -5,13 +5,14 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg col-xl">
                 <div class="form-group">
-                    <a class="btn btn-primary btn-sm btn-block" href="{{route('modules.coordinations.dashboard')}}">
+                    <a class="btn btn-primary btn-sm btn-block" href="{{route('coordinations.coordinations.index')}}">
                         Painel
                     </a>
                 </div>
             </div>
         </div>
     </div>
+    @include('coordination::years._forms.create')
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -24,6 +25,7 @@
                                 <th scope="col">Título</th>
                                 <th scope="col">TIPOS DE ENSINO</th>
                                 <th scope="col" style="width: 10.0rem">Gerenciar</th>
+                                <th scope="col" style="width: 1.0rem">Excluír</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,7 +46,16 @@
                                             Tipos de Ensino
                                         </a>
                                     </td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                           data-target="#{{ 'modal_' . $year->id }}">
+                                                <span style="cursor: pointer">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                        </a>
+                                    </td>
                                 </tr>
+                                @include('coordination::years._modals.destroy', ['year' => $year])
                             @endforeach
                             </tbody>
                         </table>

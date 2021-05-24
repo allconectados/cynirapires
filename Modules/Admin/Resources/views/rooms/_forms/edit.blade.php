@@ -1,6 +1,4 @@
 <div class="container">
-    <h6 class="card-title text-center">Editar sala - {{$room->title}}</h6>
-
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="form-group">
             <div class="row">
@@ -36,7 +34,7 @@
                     data-target="#{{ 'modal_discipline' . $room->id }}">
                 Visualizar Lista
             </button>
-            @include('admin::rooms._modals.disciplines', ['room' => $room])
+            @include('admin::rooms._modals.disciplines', ['item' => $room])
             <table class="table table-sm table-bordered table-hover">
                 <thead>
                 <tr>
@@ -58,20 +56,24 @@
                                 @method('PUT')
                                 <td>
                                     @if ($discipline->teacher != null)
-                                        <select name="teacher" class="form-control form-control-sm text-success"
-                                                onchange='this.form.submit()' style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
+                                        <select name="teacher"
+                                                class="form-control form-control-sm text-success"
+                                                onchange='this.form.submit()'
+                                                style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                             <option value="{{$discipline->teacher}}">{{$discipline->teacher}}</option>
                                             <option name="teacher" value="" class="text-danger">Selecione</option>
                                             @foreach($teachers as $teacher)
-                                                <option value="{{$teacher->name}}">{{$teacher->name}}</option>
+                                                <option value="{{$teacher->name}}" class="text-secondary">{{$teacher->name}}</option>
                                             @endforeach
                                         </select>
                                     @else
-                                        <select name="teacher" class="form-control form-control-sm"
-                                                onchange='this.form.submit()' style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
+                                        <select name="teacher"
+                                                class="form-control form-control-sm"
+                                                onchange='this.form.submit()'
+                                                style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                             <option value="">Selecione</option>
                                             @foreach($teachers as $teacher)
-                                                <option value="{{$teacher->name}}">{{$teacher->name}}</option>
+                                                <option value="{{$teacher->name}}" class="text-secondary">{{$teacher->name}}</option>
                                             @endforeach
                                         </select>
                                     @endif

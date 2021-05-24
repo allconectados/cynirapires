@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Modules\Admin\Providers\ObserverServiceProvider::class,
+        Modules\Coordination\Providers\ObserverServiceProvider::class,
 
     ],
 

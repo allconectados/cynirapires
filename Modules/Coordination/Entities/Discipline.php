@@ -46,4 +46,9 @@ class Discipline extends Model
     {
         return $this->belongsTo(Room::class)->orderBy('title', 'asc');
     }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class)->orderBy('name', 'asc');
+    }
 }
