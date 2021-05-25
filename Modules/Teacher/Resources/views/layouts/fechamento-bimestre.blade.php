@@ -18,7 +18,7 @@
 </head>
 <body style="margin-bottom: 0px !important;">
 
-<div class="container">
+<div class="container-fluid">
     {{--EXIBE MENSAGENS DE ERRO--}}
     @if(isset($errors) && count($errors) > 0)
         <div class="alert alert-warning">

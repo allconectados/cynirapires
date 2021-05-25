@@ -29,6 +29,7 @@ class CreateFaltasConselhoStudentsTable extends Migration
             $table->string('total_falta_bimestres')->nullable();
             $table->string('total_falta_compensadas_ano')->nullable();
             $table->string('total_falta_ano')->nullable();
+            $table->string('resultado_final')->nullable();
             $table->timestamps();
         });
     }

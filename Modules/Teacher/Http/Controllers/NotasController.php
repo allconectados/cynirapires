@@ -7,10 +7,8 @@ namespace Modules\Teacher\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Coordination\Entities\NotaConselho;
+use Modules\Teacher\Entities\NotaConselho;
 use Modules\Teacher\Entities\Discipline;
-use Modules\Teacher\Entities\NotaPrimeiroBimestre;
-use Modules\Teacher\Entities\NotaQuintoConceito;
 use Modules\Teacher\Entities\Room;
 use Modules\Teacher\Entities\Serie;
 use Modules\Teacher\Entities\Stage;
@@ -82,7 +80,7 @@ class NotasController extends Controller
 
         $discipline = $this->url->urlData($this->discipline, $discipline);
 
-        $titlePage = 'NOTAS DO 1º BIMESTRE: '.$discipline->title.' / '.$room->title;
+        $titlePage = 'NOTAS DO 1º BIMESTRE: ' . $discipline->title . ' / ' . $room->title;
 
         $dadosBimestres = DB::table('notas_conselhos')
             ->where('ano', '=', $year->title)
@@ -95,12 +93,9 @@ class NotasController extends Controller
 
         $statusBimestres = DB::table('status_bimestres')->first();
 
-//        dd($statusBimestres->status_primeiro_bimestre);
-
         return view('teacher::notas.index',
             compact('titlePage', 'year', 'stage', 'serie', 'room', 'discipline', 'dadosBimestres', 'statusBimestres'));
     }
-
 
 
     public function update(Request $request, $id)
@@ -131,7 +126,25 @@ class NotasController extends Controller
         $notasConselho->faltas_conselho_compensadas = $this->request->faltas_conselho_compensadas;
         $notasConselho->faltas_conselho_total = $this->request->faltas_conselho_total;
 
+        $notasConselho->nota_conselho_aulas_previstas_primeiro_bimestre = $this->request->nota_conselho_aulas_previstas_primeiro_bimestre;
+        $notasConselho->nota_conselho_aulas_previstas_segundo_bimestre = $this->request->nota_conselho_aulas_previstas_segundo_bimestre;
+        $notasConselho->nota_conselho_aulas_previstas_terceiro_bimestre = $this->request->nota_conselho_aulas_previstas_terceiro_bimestre;
+        $notasConselho->nota_conselho_aulas_previstas_quarto_bimestre = $this->request->nota_conselho_aulas_previstas_quarto_bimestre;
+
+        $notasConselho->nota_conselho_aulas_dadas_primeiro_bimestre = $this->request->nota_conselho_aulas_dadas_primeiro_bimestre;
+        $notasConselho->nota_conselho_aulas_dadas_segundo_bimestre = $this->request->nota_conselho_aulas_dadas_segundo_bimestre;
+        $notasConselho->nota_conselho_aulas_dadas_terceiro_bimestre = $this->request->nota_conselho_aulas_dadas_terceiro_bimestre;
+        $notasConselho->nota_conselho_aulas_dadas_quarto_bimestre = $this->request->nota_conselho_aulas_dadas_quarto_bimestre;
+        $notasConselho->nota_conselho_aulas_dadas_primeiro_bimestre_request = $request->input('nota_conselho_aulas_dadas_primeiro_bimestre_request');
+
+        dd($notasConselho);
+
+
+
+
+
         foreach ($this->request->id as $item => $value) {
+//            dd($this->request->nota_conselho_aulas_previstas_primeiro_bimestre[$item]);
             $dataUpdate = [
                 'discipline' => $request->discipline[$item],
                 'teacher' => $request->teacher[$item],
@@ -153,12 +166,30 @@ class NotasController extends Controller
 
                 'faltas_conselho_compensadas' => $request->faltas_conselho_compensadas[$item],
 
+
+                'nota_conselho_aulas_previstas_primeiro_bimestre' => $request->nota_conselho_aulas_previstas_primeiro_bimestre[$item],
+                'nota_conselho_aulas_previstas_segundo_bimestre' => $request->nota_conselho_aulas_previstas_segundo_bimestre[$item],
+                'nota_conselho_aulas_previstas_terceiro_bimestre' => $request->nota_conselho_aulas_previstas_terceiro_bimestre[$item],
+                'nota_conselho_aulas_previstas_quarto_bimestre' => $request->nota_conselho_aulas_previstas_quarto_bimestre[$item],
+
+                'nota_conselho_aulas_dadas_primeiro_bimestre' => $request->nota_conselho_aulas_dadas_primeiro_bimestre[$item],
+                'nota_conselho_aulas_dadas_segundo_bimestre' => $request->nota_conselho_aulas_dadas_segundo_bimestre[$item],
+                'nota_conselho_aulas_dadas_terceiro_bimestre' => $request->nota_conselho_aulas_dadas_terceiro_bimestre[$item],
+                'nota_conselho_aulas_dadas_quarto_bimestre' => $request->nota_conselho_aulas_dadas_quarto_bimestre[$item],
+
                 'faltas_conselho_total' => $request->faltas_conselho_primeiro_bimestre[$item]
                     + $request->faltas_conselho_segundo_bimestre[$item]
                     + $request->faltas_conselho_terceiro_bimestre[$item]
                     + $request->faltas_conselho_quarto_bimestre[$item] - $request->faltas_conselho_compensadas[$item],
 
+
+                'faltas_conselho_porcentagem_aulas_dadas' => 100 -
+                    ($request->faltas_conselho_primeiro_bimestre[$item] + $request->faltas_conselho_segundo_bimestre[$item]
+                        + $request->faltas_conselho_terceiro_bimestre[$item] + $request->faltas_conselho_quarto_bimestre[$item])
+                    / ($request->nota_conselho_aulas_dadas_primeiro_bimestre[$item] + $request->nota_conselho_aulas_dadas_segundo_bimestre[$item]
+                        + $request->nota_conselho_aulas_dadas_terceiro_bimestre[$item] + $request->nota_conselho_aulas_dadas_quarto_bimestre[$item]) * 100,
             ];
+
             $updateNotasConselho = NotaConselho::where('id', $request->id[$item])->update($dataUpdate);
 
         }

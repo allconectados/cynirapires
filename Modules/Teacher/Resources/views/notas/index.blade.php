@@ -61,7 +61,100 @@
             @endif
             @csrf
             @method('put')
+
             <div class="table-responsive">
+                <table class="table table-bordered table-hover target mb-0 pb-0">
+                    <thead>
+                    <tr style="font-size: 90% !important;">
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;"></th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;"></th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. PREVISTAS
+                            1ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. DADAS
+                            1ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. PREVISTAS
+                            2ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. DADAS
+                            2ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. PREVISTAS
+                            3ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. DADAS
+                            3ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. PREVISTAS
+                            4ºB
+                        </th>
+                        <th class=" text-center align-middle text-uppercase" style="width: 10% !important;">A. DADAS
+                            4ºB
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 90% !important;"
+                                       name="nota_conselho_aulas_previstas_primeiro_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_primeiro_bimestre,old('nota_conselho_aulas_previstas_primeiro_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_primeiro_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_primeiro_bimestre,old('nota_conselho_aulas_dadas_primeiro_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_segundo_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_segundo_bimestre,old('nota_conselho_aulas_previstas_segundo_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_segundo_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_segundo_bimestre,old('nota_conselho_aulas_dadas_segundo_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_terceiro_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_terceiro_bimestre,old('nota_conselho_aulas_previstas_terceiro_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_terceiro_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_terceiro_bimestre,old('nota_conselho_aulas_dadas_terceiro_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_quarto_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_quarto_bimestre,old('nota_conselho_aulas_previstas_quarto_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_quarto_bimestre_request"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_quarto_bimestre,old('nota_conselho_aulas_dadas_quarto_bimestre')}}">
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
                 <table class="table table-bordered table-hover target mb-0 pb-0">
                     <thead>
                     <tr>
@@ -81,10 +174,22 @@
                         <th class="text-center" style="width: 4.5rem">Faltas C.</th>
                         <th class="text-center" style="width: 4.5rem">T. F.</th>
 
+                        <th class="text-center" style="width: 4.5rem">AP1B</th>
+                        <th class="text-center" style="width: 4.5rem">AD1B</th>
+                        <th class="text-center" style="width: 4.5rem">AP2B</th>
+                        <th class="text-center" style="width: 4.5rem">AD2B</th>
+                        <th class="text-center" style="width: 4.5rem">AP3B</th>
+                        <th class="text-center" style="width: 4.5rem">AD3B</th>
+                        <th class="text-center" style="width: 4.5rem">AP4B</th>
+                        <th class="text-center" style="width: 4.5rem">AD4B</th>
+
+
+                        <th class="text-center" style="width: 4.5rem">PORC.</th>
+
                     </tr>
                     </thead>
 
-                    <tbody style="font-size: 90% !important;">
+                    <tbody style="font-size: 110% !important;">
 
                     @forelse($dadosBimestres->sortBy('number') as $dadosBimestre)
                         <tr style="height:1rem !important;">
@@ -450,6 +555,78 @@
                                     @default
                                 @endswitch
                             </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 90% !important;"
+                                       name="nota_conselho_aulas_previstas_primeiro_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{request()->get('nota_conselho_aulas_previstas_primeiro_bimestre_request')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_primeiro_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_primeiro_bimestre,old('nota_conselho_aulas_dadas_primeiro_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_segundo_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_segundo_bimestre,old('nota_conselho_aulas_previstas_segundo_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_segundo_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_segundo_bimestre,old('nota_conselho_aulas_dadas_segundo_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_terceiro_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_terceiro_bimestre,old('nota_conselho_aulas_previstas_terceiro_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_terceiro_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_terceiro_bimestre,old('nota_conselho_aulas_dadas_terceiro_bimestre')}}">
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_previstas_quarto_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_previstas_quarto_bimestre,old('nota_conselho_aulas_previstas_quarto_bimestre')}}">
+                            </td>
+                            <td class="text-center">
+                                <input type="text" style="width: 100% !important;"
+                                       name="nota_conselho_aulas_dadas_quarto_bimestre[]"
+                                       class="table-target text-secondary"
+                                       value="{{$dadosBimestre->nota_conselho_aulas_dadas_quarto_bimestre,old('nota_conselho_aulas_dadas_quarto_bimestre')}}">
+                            </td>
+
+
+
+                            <td class="text-truncate text-center">
+                                @switch($dadosBimestre->faltas_conselho_porcentagem_aulas_dadas)
+                                    @case($dadosBimestre->faltas_conselho_porcentagem_aulas_dadas >= 75)
+                                    <input type="text" name="faltas_conselho_porcentagem_aulas_dadas[]"
+                                           class="table-target text-danger"
+                                           value="{{$dadosBimestre->faltas_conselho_porcentagem_aulas_dadas,old('faltas_conselho_porcentagem_aulas_dadas')}}"
+                                           readonly>
+                                    @break
+
+                                    @case($dadosBimestre->faltas_conselho_porcentagem_aulas_dadas < 75)
+                                    <input type="text" name="faltas_conselho_porcentagem_aulas_dadas[]"
+                                           class="table-target text-success"
+                                           value="{{old('faltas_conselho_porcentagem_aulas_dadas')}}" readonly>
+                                    @break
+
+                                    @default
+                                @endswitch
+                            </td>
                         </tr>
                     @empty
 
@@ -472,8 +649,10 @@
                         <td>
                             @if($dadosBimestres->count() > 0)
                                 @if($statusBimestres->status_primeiro_bimestre !== 1
-                               && $statusBimestres->status_segundo_bimestre !== 1
-                               && $statusBimestres->status_terceiro_bimestre !== 1 && $statusBimestres->status_quarto_bimestre !== 1)
+                               || $statusBimestres->status_segundo_bimestre !== 1
+                               || $statusBimestres->status_terceiro_bimestre !== 1
+                               || $statusBimestres->status_quarto_bimestre !== 1
+                               || $statusBimestres->status_quinto_conceito !== 1)
                                     <button type="submit" class="btn btn-primary btn-block btn-sm">Salvar</button>
                                 @else
 
@@ -487,6 +666,18 @@
         <br><br><br><br><br>
 @endsection
 @push('scripts')
+    <script>
+        function trim(str) {
+            return str.replace(/[^a-zA-Z0-9]/g, '' )
+        }
+
+        let input = document.getElementById('um');
+        let input2 = document.getElementById('dois');
+
+        input.onkeyup = function(){
+            input2.value = trim(input.value)
+        }
+    </script>
     <script type="text/javascript">
         document.addEventListener("keydown", function (e) {
             if (e.key === 'Enter') {

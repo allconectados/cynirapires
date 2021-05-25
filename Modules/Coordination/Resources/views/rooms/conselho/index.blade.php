@@ -407,22 +407,22 @@
                             <th style="width: 14% !important;">
                                 @if($statusBimestres->status_primeiro_bimestre == 1)
                                     <select name="status_primeiro_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-success"
+                                            class="form-control form-control-sm text-danger"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_primeiro_bimestre}}">1ºB Bloqueado
                                         </option>
-                                        <option class="text-danger" value="0">1ºB Desbloqueado</option>
+                                        <option class="text-success" value="0">1ºB Desbloqueado</option>
 
                                     </select>
                                 @else
                                     <select name="status_primeiro_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-danger"
+                                            class="form-control form-control-sm text-success"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_primeiro_bimestre}}">1ºB Desbloqueado
                                         </option>
-                                        <option class="text-success" value="1">1ºB Bloqueado</option>
+                                        <option class="text-danger" value="1">1ºB Bloqueado</option>
                                     </select>
                                 @endif
 
@@ -431,21 +431,21 @@
                             <th style="width: 14% !important;">
                                 @if($statusBimestres->status_segundo_bimestre == 1)
                                     <select name="status_segundo_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-success"
+                                            class="form-control form-control-sm text-danger"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_segundo_bimestre}}">2ºB Bloqueado</option>
-                                        <option class="text-danger" value="0">2ºB Desbloqueado</option>
+                                        <option class="text-success" value="0">2ºB Desbloqueado</option>
 
                                     </select>
                                 @else
                                     <select name="status_segundo_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-danger"
+                                            class="form-control form-control-sm text-success"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_segundo_bimestre}}">2ºB Desbloqueado
                                         </option>
-                                        <option class="text-success" value="1">2ºB Bloqueado</option>
+                                        <option class="text-danger" value="1">2ºB Bloqueado</option>
                                     </select>
                                 @endif
 
@@ -454,22 +454,22 @@
                             <th style="width: 14% !important;">
                                 @if($statusBimestres->status_terceiro_bimestre == 1)
                                     <select name="status_terceiro_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-success"
+                                            class="form-control form-control-sm text-danger"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
-                                        <option value="{{$statusBimestres->status_terceiro_bimestre}}"31ºB Bloqueado
+                                        <option value="{{$statusBimestres->status_terceiro_bimestre}}">31ºB Bloqueado
                                         </option>
-                                        <option class="text-danger" value="0">3ºB Desbloqueado</option>
+                                        <option class="text-success" value="0">3ºB Desbloqueado</option>
 
                                     </select>
                                 @else
                                     <select name="status_terceiro_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-danger"
+                                            class="form-control form-control-sm text-success"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_terceiro_bimestre}}">3ºB Desbloqueado
                                         </option>
-                                        <option class="text-success" value="1">3ºB Bloqueado</option>
+                                        <option class="text-danger" value="1">3ºB Bloqueado</option>
                                     </select>
                                 @endif
 
@@ -478,21 +478,21 @@
                             <th style="width: 14% !important;">
                                 @if($statusBimestres->status_quarto_bimestre == 1)
                                     <select name="status_quarto_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-success"
+                                            class="form-control form-control-sm text-danger"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_quarto_bimestre}}">4ºB Bloqueado</option>
-                                        <option class="text-danger" value="0">4ºB Desbloqueado</option>
+                                        <option class="text-success" value="0">4ºB Desbloqueado</option>
 
                                     </select>
                                 @else
                                     <select name="status_quarto_bimestre" id="status_bimestres"
-                                            class="form-control form-control-sm text-danger"
+                                            class="form-control form-control-sm text-success"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_quarto_bimestre}}">4ºB Desbloqueado
                                         </option>
-                                        <option class="text-success" value="1">4ºB Bloqueado</option>
+                                        <option class="text-danger" value="1">4ºB Bloqueado</option>
                                     </select>
                                 @endif
 
@@ -501,21 +501,21 @@
                             <th style="width: 14% !important;">
                                 @if($statusBimestres->status_quinto_conceito == 1)
                                     <select name="status_quinto_conceito" id="status_bimestres"
-                                            class="form-control form-control-sm text-success"
+                                            class="form-control form-control-sm text-danger"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_quinto_conceito}}">5ºC Bloqueado</option>
-                                        <option class="text-danger" value="0">5ºC Desbloqueado</option>
+                                        <option class="text-success" value="0">5ºC Desbloqueado</option>
 
                                     </select>
                                 @else
                                     <select name="status_quinto_conceito" id="status_bimestres"
-                                            class="form-control form-control-sm text-danger"
+                                            class="form-control form-control-sm text-success"
                                             onchange='this.form.submit()'
                                             style="font-size: 100% !important;padding-top: 0px !important;padding-bottom: 0px !important;">
                                         <option value="{{$statusBimestres->status_quinto_conceito}}">5ºC Desbloqueado
                                         </option>
-                                        <option class="text-success" value="1">5ºC Bloqueado</option>
+                                        <option class="text-danger" value="1">5ºC Bloqueado</option>
                                     </select>
                                 @endif
 

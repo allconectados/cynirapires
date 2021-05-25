@@ -31,5 +31,6 @@ class FaltasConselhoStudent extends Model
         'total_falta_bimestres',
         'total_falta_compensadas_ano',
         'total_falta_ano',
+        'resultado_final'
     ];
 }
